@@ -1,7 +1,8 @@
 .idea/
 bower_components/
-build/
 node_modules/
+build/
+dist/
 temp/
 tmp/
 login.txt
