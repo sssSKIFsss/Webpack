@@ -1,5 +1,5 @@
-const baseConfig = require('../webpack.base.config');
-const PATHS = baseConfig.externals.paths;
+const pathPaths = require('./path');
+const PATHS = pathPaths();
 
 module.exports = function () {
 	return {

@@ -4,7 +4,7 @@
 // const service = new AppService('Hello AppService');
 // service.log();
 
-// import {config} from './modules/config';
+// import {config} from './modules/config'; - extract config
 // console.log('Config key:', config.key);
 
 // React example
@@ -16,4 +16,8 @@
 import './styles/css/index.css';
 import './styles/scss/index.scss';
 import './js';
-window.jQuery = require('jquery');
+
+// библиотека подключается благодаря вызову ёё символов в коде и
+// объявлении в разделе plagins через webpack.ProvidePlugin
+console.log($);
+console.log(jQuery);
