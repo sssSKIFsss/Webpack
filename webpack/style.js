@@ -14,7 +14,6 @@ const PATHS = require('./paths')();
 // 	console.log(`${index}: ${val}`);
 // });
 
-
 module.exports = function () {
 	return {
 		module: {

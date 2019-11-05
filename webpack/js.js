@@ -1,5 +1,4 @@
 const PATHS = require('./paths')();
-const argv = require('yards').argv;
 
 module.exports = function () {
 	return {

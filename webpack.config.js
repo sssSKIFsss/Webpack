@@ -3,16 +3,16 @@
 const argv = require('yards').argv;
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+
 const PATHS = require('./webpack/paths')();
 const server = require('./webpack/server');
 const pug = require('./webpack/pug');
 const style = require('./webpack/style');
-const js = require('./webpack/js');
-const img = require('./webpack/img');
-const font = require('./webpack/font');
 const clear = require('./webpack/clear');
-const img_minify = require('./webpack/img_minify');
 const copy = require('./webpack/copy');
+const img = require('./webpack/img');
+const js = require('./webpack/js');
+const font = require('./webpack/font');
 
 // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = ' + argv.mode);
 // const devTool = argv.mode === 'production' ?
@@ -38,8 +38,9 @@ const copy = require('./webpack/copy');
 
 const commonConfig = merge([
 	{
-		devtool: 'production',
-		//devtool: devTool,
+		externals: { paths: PATHS },
+
+		devtool: 'cheap-module-eval-source-map', // один из вариантов карты отладки
 
 		entry: {
 			// основная точка входа
@@ -116,8 +117,7 @@ const developmentConfig = merge([
 
 const productionConfig = merge([
 	commonConfig,
-	clear(),
-	img_minify()
+	clear()
 ]);
 
 module.exports = env => {

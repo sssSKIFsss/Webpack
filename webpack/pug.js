@@ -18,13 +18,17 @@ module.exports = function () {
 					/images/,
 					/fonts/,
 				],
-				// loader: 'pug-lint-loader',
-				// options: require('../.pug-lintrc'),
-				// enforce: "pre"
-				loader: 'pug-loader',
-				options: {
-					pretty: true
-				}
+				use: [
+					{
+						loader: 'pug-loader',
+						options: {
+							pretty: true
+						}
+					},{
+						loader: 'pug-lint-loader',
+						options: require('../.pug-lintrc.js')
+					}
+				]
 			}]
 		},
 		plugins: [
