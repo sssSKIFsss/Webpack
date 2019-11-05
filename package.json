@@ -10,9 +10,9 @@
     "last 3 version"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open --color",
-    "build": "webpack --mode production --color",
-    "serv": "static dist --progress --color"
+    "dev": "webpack-dev-server --env development --open",
+    "build": "webpack --env production",
+    "serv": "static dist"
   },
   "dependencies": {
     "jquery": "^3.4.1"
