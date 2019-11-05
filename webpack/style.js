@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const CssExtractPlugin = require('mini-css-extract-plugin');
-const pathPaths = require('./path');
-const PATHS = pathPaths();
+const PATHS = require('./paths')();
 
 module.exports = function () {
 	return {
@@ -35,8 +34,7 @@ module.exports = function () {
 					{
 						loader: 'css-loader',
 						options: {sourceMap: true}
-					},
-					{
+					},{
 						loader: 'postcss-loader',
 						options: {
 							sourceMap: true,
@@ -44,8 +42,7 @@ module.exports = function () {
 								path: PATHS.project + PATHS.config.postcss
 							}
 						}
-					},
-				{
+					},{
 						loader: 'sass-loader',
 						options: {sourceMap: true}
 					}

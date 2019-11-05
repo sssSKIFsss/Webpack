@@ -1,23 +1,20 @@
-const fs = require('fs');
+// const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlPlugin = require('html-webpack-plugin');
-const pathPaths = require('./webpack/path');
-const PATHS = pathPaths();
-const server = require('./webpack/server');
-const pug = require('./webpack/pug');
-const style = require('./webpack/style');
-const clear = require('./webpack/clear');
 
-const PAGES_DIR = PATHS.project + PATHS.src.path + PATHS.src.pug;
-const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'));
+const clear = require('./webpack/clear');
+const copy = require('./webpack/copy');
+const img = require('./webpack/img');
+const js = require('./webpack/js');
+const PATHS = require('./webpack/paths')();
+const pug = require('./webpack/pug');
+const server = require('./webpack/server');
+const style = require('./webpack/style');
+
 
 const commonConfig = merge([
 	{
-		externals: {
-			paths: PATHS
-		},
+		externals: { paths: PATHS },
 
 		devtool: 'cheap-module-eval-source-map', // один из вариантов карты отладки
 
@@ -54,54 +51,22 @@ const commonConfig = merge([
 			}
 		},
 
-		module: {
-			rules: [
-				{
-					test: /\.js$/,
-					loader: 'babel-loader',
-					exclude: '/node_modules/'
-				}, {
-				},{
-					test: /\.(png|jpe?g|gif|svg)$/,
-					use: [{
-						loader: 'file-loader',
-						options: {
-							name: '[name].[ext]',
-							outputPath: PATHS.dist.img,
-							useRelativePath: true
-						}
-					}]
-				},{
-					test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-					use: [{
-						loader: 'file-loader',
-						options: {
-							name: '[name].[ext]',
-							outputPath: PATHS.dist.fonts,
-							useRelativePath: true
-						}
-					}]
-				}
-			]
-		},
-
 		plugins: [
-			new CopyPlugin([
-				{from: PATHS.project + PATHS.src.path + PATHS.src.htaccess, to: ''}
-			]),
+			// new CopyPlugin([
+			// 	{from: PATHS.project + PATHS.src.path + PATHS.src.htaccess, to: ''}
+			// ]),
 			// автоматически подключает библиотеки, встечающиеся в коде
 			new webpack.ProvidePlugin({
 				$: 'jquery',
 				jQuery: 'jquery'
 			}),
-			...PAGES.map(page => new HtmlPlugin({
-				template: `${PAGES_DIR}/${page}`, // pug
-				filename: `./${page.replace(/\.pug/, '.html')}`
-			}))
-		],
+		]
 	},
 	pug(),
-	style()
+	style(),
+	js(),
+	img(),
+	copy()
 ]);
 
 const developmentConfig = merge([
