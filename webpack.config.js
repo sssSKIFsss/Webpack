@@ -1,31 +1,65 @@
-const fs = require('fs');
+'use strict';
+
+const argv = require('yards').argv;
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlPlugin = require('html-webpack-plugin');
-const pathPaths = require('./webpack/path');
-const PATHS = pathPaths();
+const PATHS = require('./webpack/paths')();
 const server = require('./webpack/server');
 const pug = require('./webpack/pug');
 const style = require('./webpack/style');
+const js = require('./webpack/js');
+const img = require('./webpack/img');
+const font = require('./webpack/font');
 const clear = require('./webpack/clear');
+const img_minify = require('./webpack/img_minify');
+const copy = require('./webpack/copy');
 
-const PAGES_DIR = PATHS.project + PATHS.src.path + PATHS.src.pug;
-const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'));
+// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = ' + argv.mode);
+// const devTool = argv.mode === 'production' ?
+// 	false : 'cheap-module-eval-source-map';
+
+// const NODE_ENV = process.env.NODE_ENV || 'production';
+// const DEV_MODE = process.env.development || false;
+//
+// if (process.env.production) {
+// 	console.log('!!!!!!!!! WELCOME TO PRODUCTION MODE !!!!!!!!!!!!!!!!');
+// }
+// if (process.env.development) {
+// 	console.log('!!!!!!!!! WELCOME TO DEVELOPMENT MODE !!!!!!!!!!!!!!!!');
+// }
+//
+// process.argv.forEach((val, index)=>{
+// 	console.log(`${index}: ${val}`);
+// });
+//
+// console.log('!!!!!!!!! argv.mode = ' + process.argv.mode + ' !!!!!!!!!!!!!!!!');
+// console.log('!!!!!!!!! NODE_ENV = ' + process.env.NODE_ENV + ' !!!!!!!!!!!!!!!!');
+// console.log('!!!!!!!!! NODE_DEV = ' + process.env.development + ' !!!!!!!!!!!!!!!!');
 
 const commonConfig = merge([
 	{
-		externals: {
-			paths: PATHS
-		},
-
-		devtool: 'cheap-module-eval-source-map', // один из вариантов карты отладки
+		devtool: 'production',
+		//devtool: devTool,
 
 		entry: {
 			// основная точка входа
 			app: PATHS.project + PATHS.src.path + PATHS.src.js_file1,
-			// если нужно - вторая точка входа для личного кабинета, например
-			adminka: PATHS.project + PATHS.src.path + PATHS.src.js_file2
+			// 1.entry-массив - несколько точек входа
+			//   entry: ['./public/src/index.js', './public/src/googleAnalytics.js']
+			// 2.entru-объект - например для многостраничного приложения
+			//   entry: {
+			//     "indexEntry": './public/src/index.js',
+			//     "profileEntry": './public/src/profile.js'
+			//   }
+			// 3. комбинация
+			//  entry {
+			//  	"vendor": ['jquery', 'analytics.js', 'optimizely.js'],
+			//  	"index": './publick/src/index.js',
+			//  	"profile": './public/src/profile.js'
+			//  }
+			///////////////////////////////////////////////////////////////////
+			// сюда взять инфу с iPad
+			///////////////////////////////////////////////////////////////////
 		},
 
 		output: {
@@ -54,54 +88,25 @@ const commonConfig = merge([
 			}
 		},
 
-		module: {
-			rules: [
-				{
-					test: /\.js$/,
-					loader: 'babel-loader',
-					exclude: '/node_modules/'
-				}, {
-				},{
-					test: /\.(png|jpe?g|gif|svg)$/,
-					use: [{
-						loader: 'file-loader',
-						options: {
-							name: '[name].[ext]',
-							outputPath: PATHS.dist.img,
-							useRelativePath: true
-						}
-					}]
-				},{
-					test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-					use: [{
-						loader: 'file-loader',
-						options: {
-							name: '[name].[ext]',
-							outputPath: PATHS.dist.fonts,
-							useRelativePath: true
-						}
-					}]
-				}
-			]
-		},
-
 		plugins: [
-			new CopyPlugin([
-				{from: PATHS.project + PATHS.src.path + PATHS.src.htaccess, to: ''}
-			]),
+			// new webpack.DefinePlugin({
+			// 	NODE_ENV: JSON.stringify('development'),
+			// 	DEV_MODE: JSON.stringify('true'),
+			//
+			// }),
 			// автоматически подключает библиотеки, встечающиеся в коде
 			new webpack.ProvidePlugin({
 				$: 'jquery',
 				jQuery: 'jquery'
-			}),
-			...PAGES.map(page => new HtmlPlugin({
-				template: `${PAGES_DIR}/${page}`, // pug
-				filename: `./${page.replace(/\.pug/, '.html')}`
-			}))
+			})
 		],
 	},
 	pug(),
-	style()
+	style(),
+	js(),
+	font(),
+	img(),
+	copy()
 ]);
 
 const developmentConfig = merge([
@@ -111,10 +116,11 @@ const developmentConfig = merge([
 
 const productionConfig = merge([
 	commonConfig,
-	clear()
+	clear(),
+	img_minify()
 ]);
 
-module.exports = function(env) {
+module.exports = env => {
 	if(env === 'production') {
 		return productionConfig;
 	}

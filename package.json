@@ -10,9 +10,9 @@
     "last 3 version"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --open --env development",
-    "build": "webpack --env production",
-    "serv": "static dist"
+    "dev": "webpack-dev-server --mode development --open --color",
+    "build": "webpack --mode production --color",
+    "serv": "static dist --progress --color"
   },
   "dependencies": {
     "jquery": "^3.4.1"
@@ -37,12 +37,13 @@
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.4",
-    "pug-loader": "^2.4.0",
+    "pug-lint-loader": "0.0.4",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "yards": "^0.1.4"
   }
 }
