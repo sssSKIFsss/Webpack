@@ -10,13 +10,11 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.pug$/,
-				include: [ PATHS.project + PATHS.src.path + PATHS.src.pug ],
+				// не удалось подключить include
+				// include: [path.resolve(__dirname, "src/pug/pages")],
+				// include: PATHS.project + PATHS.src.path + PATHS.src.pug,
 				exclude: [
-					/node_modules/,
-					/webpack/,
-					/dist/,
-					/images/,
-					/fonts/,
+					/node_modules|webpack|dist|images|fonts/,
 				],
 				use: [
 					{
@@ -24,9 +22,9 @@ module.exports = function () {
 						options: {
 							pretty: true
 						}
-					},{
+					}, {
 						loader: 'pug-lint-loader',
-						options: require('../.pug-lintrc.js')
+						options: require('../.pug-lintrc')
 					}
 				]
 			}]

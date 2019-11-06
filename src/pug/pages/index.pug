@@ -1,19 +1,19 @@
-extends ../layouts/main
+extends ../layouts/main.pug
 
 block variables
-    - var title = 'Webpack + Pug';
-    - var pageClass = 'index-page';
+  - var title = 'Webpack + Pug';
+  - var pageClass = 'index-page';
 
 block content
   section
     .container
       +item('Hello Item', 'This is first view on Items')
-      img(src=require('~/images/img2.jpg') width='100')
+      img(src=require('~/images/img2.jpg') width='100' alt='men')
   section
     .container
       +item('Hello pug!', 'Jade - node template engine')
-      img(src=require('~/images/img3.jpg') width='100')
+      img(src=require('~/images/img3.jpg') width='100' alt='women')
   section
     .container
       +item('Hello Webpack!', 'Webpack - engine for collecting files')
-      img(src=require('~/images/img2.jpg') width='100')
+      img(src=require('~/images/img2.jpg') width='100' alt='men')

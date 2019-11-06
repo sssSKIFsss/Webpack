@@ -16,7 +16,9 @@ module.exports = {
 	"disallowMultipleLineBreaks": true,
 	"disallowSpaceAfterCodeOperator": null,
 	"disallowSpacesInsideAttributeBrackets": true,
-	"disallowSpecificAttributes": [{ "a": "name" }],
+	"disallowSpecificAttributes": [{
+		"a": "name"
+	}],
 	"disallowSpecificTags": null,
 	"disallowStringConcatenation": true,
 	"disallowStringInterpolation": null,
@@ -25,7 +27,7 @@ module.exports = {
 	"requireClassLiteralsBeforeAttributes": true,
 	"requireClassLiteralsBeforeIdLiterals": true,
 	"requireIdLiteralsBeforeAttributes": true,
-	"requireLineFeedAtFileEnd": true,
+	"requireLineFeedAtFileEnd": null,
 	"requireLowerCaseAttributes": true,
 	"requireLowerCaseTags": true,
 	"requireSpaceAfterCodeOperator": true,
@@ -40,14 +42,14 @@ module.exports = {
 		"input[type=submit]": "value"
 	}],
 	"requireStrictEqualityOperators": true,
-	"validateAttributeQuoteMarks": "\"",
+	"validateAttributeQuoteMarks": "'",
 	"validateAttributeSeparator": {
-		"separator": ", ",
+		"separator": " ",
 		"multiLineSeparator": "\n  "
 	},
 	"validateDivTags": true,
-	"validateExtensions": true,
+	"validateExtensions": null,
 	"validateIndentation": 2,
-	"validateLineBreaks": "LF",
+	"validateLineBreaks": "CRLF",
 	"validateSelfClosingTags": true
 };

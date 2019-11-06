@@ -10,8 +10,8 @@
     "last 3 version"
   ],
   "scripts": {
-    "dev": "webpack-dev-server env development --open",
-    "build": "webpack --env production",
+    "dev": "webpack-dev-server --env development --open --color",
+    "build": "webpack --env production --color",
     "serv": "static dist"
   },
   "dependencies": {

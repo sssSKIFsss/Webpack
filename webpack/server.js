@@ -9,6 +9,7 @@ module.exports = function () {
 				warning: true, // вывод ошибок в браузер
 				error: true // вывод ошибок в браузер
 			}
-		}
+		},
+		// watchOptions: { aggregateTimeout: 100 }
 	}
 };
