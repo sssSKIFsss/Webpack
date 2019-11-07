@@ -6,13 +6,7 @@ module.exports = function () {
 			rules: [{
 				test: /\.js$/,
 				include: [ PATHS.project + PATHS.src.path ],
-				exclude: [
-					/node_modules/,
-					/webpack/,
-					/dist/,
-					/images/,
-					/fonts/
-				],
+				exclude: /(node_modules|webpack|dist|images|fonts|pug|styles)/,
 				use: {
 					loader: 'babel-loader?optional[]=runtime',
 					options: {

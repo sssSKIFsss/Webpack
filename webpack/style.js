@@ -19,10 +19,10 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.css$/,
+				exclude: /(node_modules|webpack|dist|images|fonts|pug|js)/,
 				use: [
 					"style-loader",
 					CssExtractPlugin.loader,
-					//  exclude: '/node_modules/', // нужно ли ?
 					{
 						loader: "css-loader",
 						options: {sourceMap: true}
@@ -38,10 +38,10 @@ module.exports = function () {
 				]
 			},{
 				test: /\.scss$/,
+				exclude: /(node_modules|webpack|dist|images|fonts|pug|js)/,
 				use: [
 					"style-loader",
 					CssExtractPlugin.loader,
-					//  exclude: '/node_modules/', // нужно ли ?
 					{
 						loader: 'css-loader',
 						options: {sourceMap: true}

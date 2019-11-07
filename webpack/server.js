@@ -10,6 +10,6 @@ module.exports = function () {
 				error: true // вывод ошибок в браузер
 			}
 		},
-		// watchOptions: { aggregateTimeout: 100 }
+		watchOptions: { aggregateTimeout: 100 }
 	}
 };

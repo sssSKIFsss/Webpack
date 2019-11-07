@@ -1,6 +1,6 @@
 'use strict';
 
-const argv = require('yards').argv;
+const NODE_ENV = require('yargs').argv.env;
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
@@ -14,53 +14,28 @@ const img = require('./webpack/img');
 const js = require('./webpack/js');
 const font = require('./webpack/font');
 
-// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = ' + argv.mode);
-// const devTool = argv.mode === 'production' ?
-// 	false : 'cheap-module-eval-source-map';
-
-// const NODE_ENV = process.env.NODE_ENV || 'production';
-// const DEV_MODE = process.env.development || false;
-//
-// if (process.env.production) {
-// 	console.log('!!!!!!!!! WELCOME TO PRODUCTION MODE !!!!!!!!!!!!!!!!');
-// }
-// if (process.env.development) {
-// 	console.log('!!!!!!!!! WELCOME TO DEVELOPMENT MODE !!!!!!!!!!!!!!!!');
-// }
-//
-// process.argv.forEach((val, index)=>{
-// 	console.log(`${index}: ${val}`);
-// });
-//
-// console.log('!!!!!!!!! argv.mode = ' + process.argv.mode + ' !!!!!!!!!!!!!!!!');
-// console.log('!!!!!!!!! NODE_ENV = ' + process.env.NODE_ENV + ' !!!!!!!!!!!!!!!!');
-// console.log('!!!!!!!!! NODE_DEV = ' + process.env.development + ' !!!!!!!!!!!!!!!!');
-
 const commonConfig = merge([
 	{
-		externals: { paths: PATHS },
+		// externals: { paths: PATHS },
 
-		devtool: 'cheap-module-eval-source-map', // один из вариантов карты отладки
+		devtool: NODE_ENV === 'production' ? false : 'cheap-eval-source-map',
+		mode : NODE_ENV === 'production' ? 'production' : 'development',
 
 		entry: {
-			// основная точка входа
 			app: PATHS.project + PATHS.src.path + PATHS.src.js_file1,
-			// 1.entry-массив - несколько точек входа
-			//   entry: ['./public/src/index.js', './public/src/googleAnalytics.js']
-			// 2.entru-объект - например для многостраничного приложения
-			//   entry: {
-			//     "indexEntry": './public/src/index.js',
-			//     "profileEntry": './public/src/profile.js'
-			//   }
-			// 3. комбинация
-			//  entry {
-			//  	"vendor": ['jquery', 'analytics.js', 'optimizely.js'],
-			//  	"index": './publick/src/index.js',
-			//  	"profile": './public/src/profile.js'
-			//  }
-			///////////////////////////////////////////////////////////////////
-			// сюда взять инфу с iPad
-			///////////////////////////////////////////////////////////////////
+				// 1.entry-массив - несколько точек входа
+				//   entry: ['./public/src/index.js', './public/src/googleAnalytics.js']
+				// 2.entru-объект - например для многостраничного приложения
+				//   entry: {
+				//     "indexEntry": './public/src/index.js',
+				//     "profileEntry": './public/src/profile.js'
+				//   }
+				// 3. комбинация
+				//  entry {
+				//  	"vendor": ['jquery', 'analytics.js', 'optimizely.js'],
+				//  	"index": './publick/src/index.js',
+				//  	"profile": './public/src/profile.js'
+				//  }
 		},
 
 		output: {
@@ -90,11 +65,10 @@ const commonConfig = merge([
 		},
 
 		plugins: [
-			// new webpack.DefinePlugin({
-			// 	NODE_ENV: JSON.stringify('development'),
-			// 	DEV_MODE: JSON.stringify('true'),
-			//
-			// }),
+			// доступ к обозначенной переменной в коде проекта вне Webpack
+			new webpack.DefinePlugin({
+				NODE_ENV: JSON.stringify(NODE_ENV)
+			}),
 			// автоматически подключает библиотеки, встечающиеся в коде
 			new webpack.ProvidePlugin({
 				$: 'jquery',
@@ -121,13 +95,5 @@ const productionConfig = merge([
 ]);
 
 module.exports = env => {
-	if(env === 'production') {
-		return productionConfig;
-	}
-	else if (env === 'development') {
-		return developmentConfig
-	} else {
-		console.log('Error');
-		return NaN;
-	}
+	return env === 'production' ? productionConfig : developmentConfig;
 };

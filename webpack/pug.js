@@ -13,9 +13,7 @@ module.exports = function () {
 				// не удалось подключить include
 				// include: [path.resolve(__dirname, "src/pug/pages")],
 				// include: PATHS.project + PATHS.src.path + PATHS.src.pug,
-				exclude: [
-					/node_modules|webpack|dist|images|fonts/,
-				],
+				exclude: /(node_modules|webpack|dist|images|fonts|js|styles)/,
 				use: [
 					{
 						loader: 'pug-loader',
