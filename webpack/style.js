@@ -2,18 +2,6 @@ const webpack = require('webpack');
 const CssExtractPlugin = require('mini-css-extract-plugin');
 const PATHS = require('./paths')();
 
-// const argv = require('yards').argv;
-// if (process.env.production) {
-// 	console.log('!!!!!!!!! WELCOME TO PRODUCTION MODE !!!!!!!!!!!!!!!!');
-// }
-// if (process.env.development) {
-// 	console.log('!!!!!!!!! WELCOME TO DEVELOPMENT MODE !!!!!!!!!!!!!!!!');
-// }
-//
-// process.argv.forEach((val, index)=>{
-// 	console.log(`${index}: ${val}`);
-// });
-
 module.exports = function () {
 	return {
 		module: {

@@ -9,8 +9,9 @@ module.exports = function() {
 			pug     : 'pug/pages',
 			pug_file: 'index.pug',
 			js      : 'js/',
-			js_file1: 'index.js',
-			js_file2: 'adminka.js', // вторая точка входа для личного кабинета
+			js_entry: 'index.js',
+			js_entry2: 'adminka.js', // вторая точка входа для личного кабинета
+			// js_entry_vendors: ['jquery', 'analytics.js', 'optimizely.js'],
 			css     : 'styles/css/',
 			scss    : 'styles/scss/',
 			img     : 'images/',

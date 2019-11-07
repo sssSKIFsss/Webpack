@@ -1,4 +1,9 @@
 'use strict';
 
-console.log(5+11);
+import welcome from './js/modules/welcome';
+
+welcome('admin page');
+console.log("admin page worked!");
+
+exports.welcome = welcome;
 

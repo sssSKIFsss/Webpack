@@ -1,1 +1,1 @@
-import './modules/common';
+import './modules/mode';

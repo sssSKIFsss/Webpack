@@ -20,20 +20,26 @@ const commonConfig = merge([
 
 		devtool: NODE_ENV === 'production' ? false : 'cheap-eval-source-map',
 		mode : NODE_ENV === 'production' ? 'production' : 'development',
+		//The base directory, an absolute path, for resolving entry points
+		// and loaders from configuration
+		context: PATHS.project + PATHS.src.path,
 
 		entry: {
-			app: PATHS.project + PATHS.src.path + PATHS.src.js_file1,
-				// 1.entry-массив - несколько точек входа
+			app: "./" + PATHS.src.js_entry,
+			adm: "./" + PATHS.src.js_entry2,
+				// 1.entry-строка - одна точка входа
+				//   entry: './index.js'
+				// 2.entry-массив - несколько точек входа
 				//   entry: ['./public/src/index.js', './public/src/googleAnalytics.js']
-				// 2.entru-объект - например для многостраничного приложения
+				// 3.entry-объект - например для многостраничного приложения
 				//   entry: {
 				//     "indexEntry": './public/src/index.js',
 				//     "profileEntry": './public/src/profile.js'
 				//   }
-				// 3. комбинация
+				// 4. комбинация
 				//  entry {
 				//  	"vendor": ['jquery', 'analytics.js', 'optimizely.js'],
-				//  	"index": './publick/src/index.js',
+				//  	"index": './public/src/index.js',
 				//  	"profile": './public/src/profile.js'
 				//  }
 		},
@@ -41,8 +47,8 @@ const commonConfig = merge([
 		output: {
 			path: PATHS.project + PATHS.dist.path,
 			filename: PATHS.dist.js + PATHS.dist.js_file,
-			publicPath: '/'
-			// library: "home"
+			publicPath: '/',
+			library: "[name]"
 		},
 
 		resolve: {
@@ -59,9 +65,18 @@ const commonConfig = merge([
 						test: /node_modules/,
 						chunks: 'all',
 						enforce: true
+					},
+					commons: { // создание общих для разных файлов модулей
+						name: 'common',
+						chunks: 'initial',
+						minChunks: 2,
+						maxInitialRequests: 5,
+						minSize: 0
 					}
 				}
-			}
+			},
+			// запрет компиляции бандла при ошибке
+			noEmitOnErrors: true
 		},
 
 		plugins: [
