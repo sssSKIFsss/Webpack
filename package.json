@@ -10,15 +10,17 @@
     "last 3 version"
   ],
   "scripts": {
-    "dev": "webpack --env development",
-    "build": "webpack --env production",
-    "start": "static &"
+    "dev"  : "webpack --env development",
+    "build": "webpack --env build",
+    "prod" : "webpack --env production",
+    "serv" : "static dist"
   },
   "dependencies": {},
   "devDependencies": {
     "node-static": "^0.7.11",
     "path": "^0.12.7",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "yargs": "^14.2.0"
   }
 }
