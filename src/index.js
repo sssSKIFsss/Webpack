@@ -15,16 +15,4 @@
 
 import './styles/css/index.css';
 import './styles/scss/index.scss';
-import './js';
-
-import welcome from './js/modules/welcome';
-
-welcome('index page');
-console.log("index page worked!");
-
-exports.welcome = welcome;
-
-// библиотека подключается благодаря вызову ёё символов в коде и
-// объявлении в разделе plugins через webpack.ProvidePlugin
-console.log($);
-console.log(jQuery);
+import './js/main';

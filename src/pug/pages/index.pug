@@ -7,7 +7,7 @@ block variables
 block content
   section
     .container
-      +item('Hello Item', 'This is first view on Items')
+      +item('Hello Item!', 'This is first view on Items')
       img(src=require('~/images/img2.jpg') width='100' alt='men')
   section
     .container
@@ -17,5 +17,6 @@ block content
     .container
       +item('Hello Webpack!', 'Webpack - engine for collecting files')
       img(src=require('~/images/img2.jpg') width='100' alt='men')
-  script
-    app.welcome("something about index.pug?")
+  button(id='login_button') This is a test!
+  //script
+  //  app.welcome("something about index.pug?")

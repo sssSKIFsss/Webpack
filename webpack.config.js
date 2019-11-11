@@ -1,8 +1,8 @@
 'use strict';
 
-const NODE_ENV = require('yargs').argv.env;
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const ENV = require('yargs').argv.env;
 
 const PATHS = require('./webpack/paths')();
 const server = require('./webpack/server');
@@ -16,32 +16,28 @@ const font = require('./webpack/font');
 
 const commonConfig = merge([
 	{
-		// externals: { paths: PATHS },
-
-		devtool: NODE_ENV === 'production' ? false : 'cheap-eval-source-map',
-		mode : NODE_ENV === 'production' ? 'production' : 'development',
 		//The base directory, an absolute path, for resolving entry points
 		// and loaders from configuration
 		context: PATHS.project + PATHS.src.path,
-
 		entry: {
-			app: "./" + PATHS.src.js_entry,
-			adm: "./" + PATHS.src.js_entry2,
-				// 1.entry-строка - одна точка входа
-				//   entry: './index.js'
-				// 2.entry-массив - несколько точек входа
-				//   entry: ['./public/src/index.js', './public/src/googleAnalytics.js']
-				// 3.entry-объект - например для многостраничного приложения
-				//   entry: {
-				//     "indexEntry": './public/src/index.js',
-				//     "profileEntry": './public/src/profile.js'
-				//   }
-				// 4. комбинация
-				//  entry {
-				//  	"vendor": ['jquery', 'analytics.js', 'optimizely.js'],
-				//  	"index": './public/src/index.js',
-				//  	"profile": './public/src/profile.js'
-				//  }
+			app:    "./" + PATHS.src.js_entry1,
+			adm:    "./" + PATHS.src.js_entry2,
+			vendors: PATHS.src.js_entry_vendors
+			// 1.entry-строка - одна точка входа
+			//   entry: './index.js'
+			// 2.entry-массив - несколько точек входа
+			//   entry: ['./public/src/index.js', './public/src/googleAnalytics.js']
+			// 3.entry-объект - например для многостраничного приложения
+			//   entry: {
+			//     "indexEntry": './public/src/index.js',
+			//     "profileEntry": './public/src/profile.js'
+			//   }
+			// 4. комбинация
+			//  entry {
+			//  	"vendor": ['jquery', 'analytics.js', 'optimizely.js'],
+			//  	"index": './public/src/index.js',
+			//  	"profile": './public/src/profile.js'
+			//  }
 		},
 
 		output: {
@@ -50,6 +46,11 @@ const commonConfig = merge([
 			publicPath: '/',
 			library: "[name]"
 		},
+
+		// externals: { paths: PATHS },
+
+		devtool: ENV === 'development' ? 'eval' : false,
+		mode : ENV === 'production' ? 'production' : 'development',
 
 		resolve: {
 			alias: {
@@ -60,7 +61,7 @@ const commonConfig = merge([
 		optimization: {
 			splitChunks: { // деление файла js на app и vendors
 				cacheGroups: {
-					vendor: { // например, для подключения jquery, bootstrap
+					vendors: { // например, для подключения jquery, bootstrap
 						name: 'vendors',
 						test: /node_modules/,
 						chunks: 'all',
@@ -75,19 +76,21 @@ const commonConfig = merge([
 					}
 				}
 			},
+
 			// запрет компиляции бандла при ошибке
 			noEmitOnErrors: true
 		},
 
 		plugins: [
+			// // автоматически подключает библиотеки, встечающиеся в коде
+			// new webpack.ProvidePlugin({
+			// 	$: 'jquery',
+			// 	jQuery: 'jquery'
+			// 	})
+			//
 			// доступ к обозначенной переменной в коде проекта вне Webpack
 			new webpack.DefinePlugin({
-				NODE_ENV: JSON.stringify(NODE_ENV)
-			}),
-			// автоматически подключает библиотеки, встечающиеся в коде
-			new webpack.ProvidePlugin({
-				$: 'jquery',
-				jQuery: 'jquery'
+				ENV: JSON.stringify(ENV)
 			})
 		],
 	},
@@ -110,5 +113,5 @@ const productionConfig = merge([
 ]);
 
 module.exports = env => {
-	return env === 'production' ? productionConfig : developmentConfig;
+	return env === 'development' ? developmentConfig : productionConfig;
 };

@@ -1,8 +1,12 @@
-let add = (a, b) => a + b;
-console.log( add(3, 5) );
+'use strict';
 
-if(NODE_ENV === 'development') {
-	console.log('!!!!!!!!!!!!! РЕЖИМ РАЗАРБОТКИ !!!!!!!!!!!!!!');
-} else {
-	console.log('!!!!!!!!!!!!! РЕЖИМ ПРОДАКШЕНА !!!!!!!!!!!!!!');
+let modeMessage = '!! ОПРЕДЕЛЯЕМ РЕЖИМ КОМПИЛЯЦИИ !!/n';
+
+export function getMode(devFlag) {
+	if(devFlag) {
+		modeMessage += '!! ОБНАРУЖЕН РЕЖИМ РАЗАРБОТКИ !!';
+	} else {
+		modeMessage += '!!! ОБНАРУЖЕН РЕЖИМ ПРОДАКШЕНА !!!';
+	}
+	alert(modeMessage);
 }

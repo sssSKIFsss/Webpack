@@ -11,12 +11,15 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --env development --open --color",
-    "build": "webpack --env production --color",
+    "build": "webpack --env build --color",
+    "prod": "webpack --env production --color",
     "serv": "static dist"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "popper.js": "^1.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",

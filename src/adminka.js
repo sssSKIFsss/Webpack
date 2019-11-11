@@ -1,9 +1,7 @@
 'use strict';
 
-import welcome from './js/modules/welcome';
+import './styles/css/index.css';
+import './js/adm';
 
-welcome('admin page');
-console.log("admin page worked!");
 
-exports.welcome = welcome;
 
