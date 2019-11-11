@@ -78,7 +78,7 @@ var about =
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/js";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -100,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-console.log("Hi from ABOUT.JS");
+console.log('Hi from ABOUT.JS');
 Object(_modules_welcome__WEBPACK_IMPORTED_MODULE_0__["default"])('ABOUT_JS!');
 
 /***/ }),

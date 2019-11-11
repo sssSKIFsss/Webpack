@@ -12,6 +12,7 @@ module.exports = {
 	},
 	output: {
 		path: paths.resolve(__dirname, "dist"),
+		publicPath: "/js",
 		filename: "./js/[name].js",
 		library: "[name]"
 	},
@@ -31,7 +32,6 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			ENV: JSON.stringify(ENV)
-		}),
-	new webpack.NoEmitOnErrorsPlugin()
+		})
 	]
 };
