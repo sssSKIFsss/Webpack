@@ -10,13 +10,16 @@
     "last 3 version"
   ],
   "scripts": {
-    "dev"  : "webpack --env development",
+    "dev": "webpack --env development",
     "build": "webpack --env build",
-    "prod" : "webpack --env production",
-    "serv" : "static dist"
+    "prod": "webpack --env production",
+    "serv": "static dist"
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
     "node-static": "^0.7.11",
     "path": "^0.12.7",
     "webpack": "^4.41.2",

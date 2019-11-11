@@ -6,7 +6,7 @@ const ENV = require('yargs').argv.env;
 
 module.exports = {
 	entry: {
-		app: paths.resolve(__dirname, "src/index.js")
+		app: paths.resolve(__dirname, "src/js/main.js")
 	},
 	output: {
 		path: paths.resolve(__dirname, "dist"),
@@ -15,6 +15,16 @@ module.exports = {
 	},
 	devtool: ENV === 'development' ? 'eval' : false,
 	mode : ENV === 'production' ? 'production' : 'development',
+
+	module: {
+		rules: [{
+			test: /\.js$/,
+			exclude: /(node_modules|webpack|dist|images|fonts|pug|styles)/,
+			use: {
+				loader: 'babel-loader'
+			}
+		}]
+	},
 
 	plugins: [
 		new webpack.DefinePlugin({

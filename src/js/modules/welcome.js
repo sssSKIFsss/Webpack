@@ -5,11 +5,12 @@
 // 	alert(`Welcome ${message}`);
 // };
 
-module.exports = function (message) {
-	if(ENV !== 'production') {
-		console.log("Hi from WELCOME.JS with DEVELOPMENT or BUILD mode");
+export default function(message) {
+	// noinspection JSUnresolvedVariable
+	if(ENV === 'development') {
+		console.log("Hi from WELCOME.JS with DEVELOPMENT mode");
 	} else {
-		console.log("Hi from WELCOME.JS with PRODUCTION mode");
+		console.log("Hi from WELCOME.JS with PRODUCTION or BUILD mode");
 	}
 	alert(`Welcome ${message}`);
 };
