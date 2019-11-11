@@ -2,11 +2,13 @@
 
 const paths = require('path');
 const webpack = require('webpack');
+// noinspection JSUnresolvedVariable
 const ENV = require('yargs').argv.env;
 
 module.exports = {
 	entry: {
-		app: paths.resolve(__dirname, "src/js/main.js")
+		app: paths.resolve(__dirname, "src/js/main.js"),
+		about:paths.resolve(__dirname, "src/js/about.js"),
 	},
 	output: {
 		path: paths.resolve(__dirname, "dist"),
@@ -29,6 +31,7 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			ENV: JSON.stringify(ENV)
-		})
+		}),
+	new webpack.NoEmitOnErrorsPlugin()
 	]
 };

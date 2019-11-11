@@ -1,4 +1,4 @@
-var app =
+var about =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -82,15 +82,15 @@ var app =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/about.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/main.js":
-/*!************************!*\
-  !*** ./src/js/main.js ***!
-  \************************/
+/***/ "./src/js/about.js":
+/*!*************************!*\
+  !*** ./src/js/about.js ***!
+  \*************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -100,10 +100,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-console.log("Hi from MAIN.JS");
-Object(_modules_welcome__WEBPACK_IMPORTED_MODULE_0__["default"])('MAIN_JS!'); // не получается сделать экспорт отсюда, если есть родительский файл, например, index.js
-// приходится делать экспорт из родителя - index.jsm
-// exports.welcome = welcome;
+console.log("Hi from ABOUT.JS");
+Object(_modules_welcome__WEBPACK_IMPORTED_MODULE_0__["default"])('ABOUT_JS!');
 
 /***/ }),
 
