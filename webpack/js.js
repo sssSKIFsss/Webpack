@@ -8,7 +8,7 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.js$/,
-				exclude: /(node_modules|webpack|dist|images|fonts|pug|styles)/,
+				exclude: /(node_modules|webpack|images|fonts|pug|styles)/,
 				use: {
 					loader: 'babel-loader'
 				}

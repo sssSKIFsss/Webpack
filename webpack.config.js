@@ -2,6 +2,7 @@
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+// noinspection JSUnresolvedVariable
 const ENV = require('yargs').argv.env;
 
 const PATHS = require('./webpack/paths')();
@@ -79,6 +80,12 @@ const commonConfig = merge([
 
 			// запрет компиляции бандла при ошибке
 			noEmitOnErrors: true
+		},
+
+		// ускорение сборки отменой парсинга файлов больших библиотек, которые в этом случае
+		// не должны содержать require, import, define и др. механизмы импорта
+		module: {
+			noParse: /jquery|bootstrap|popper.js/
 		},
 
 		plugins: [

@@ -11,8 +11,9 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --env development --open --color",
-    "build": "webpack --env build --color",
     "prod": "webpack --env production --color",
+    "build": "webpack --env build --color",
+    "display": "webpack --env build --profile --display-modules --display-reasons --color",
     "serv": "static dist"
   },
   "dependencies": {

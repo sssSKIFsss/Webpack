@@ -11,7 +11,7 @@ module.exports = function() {
 			js       : 'js/',
 			js_entry1: 'index.js',
 			js_entry2: 'adminka.js', // вторая точка входа для личного кабинета
-			js_entry_vendors: ['jquery', 'bootstrap'],
+			js_entry_vendors: ['jquery', 'bootstrap', 'popper.js'],
 			css      : 'styles/css/',
 			scss     : 'styles/scss/',
 			img      : 'images/',
