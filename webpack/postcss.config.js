@@ -5,10 +5,17 @@
 // if(ARGV.mode === PATHS.mode.prod) {
 // }
 module.exports = {
-	plugins: [
-		require('autoprefixer'),
-		require('css-mqpacker'),
-		require('cssnano') ({
+	ident: 'postcss',
+	plugins: {
+		'postcss-import': {},
+		// 'postcss-resolve-url': {},
+		// 'postcss-next': {
+		// 	browsers: ['last 2 version', '>5%']
+		// },
+		'autoprefixer': {},
+		'css-mqpacker': {},
+		// 'stylelint': {},
+		'cssnano': {
 			preset: [
 				'default',
 				{
@@ -17,6 +24,6 @@ module.exports = {
 					}
 				}
 			]
-		})
-	]
+		}
+	}
 };

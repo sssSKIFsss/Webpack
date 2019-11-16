@@ -2,6 +2,7 @@
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const WebpackMd5Hash = require('webpack-md5-hash');
 // noinspection JSUnresolvedVariable
 const ENV = require('yargs').argv.env;
 
@@ -89,16 +90,18 @@ const commonConfig = merge([
 		},
 
 		plugins: [
+			// исправление механизма хеширования в именах файлов
+			new WebpackMd5Hash(),
+			// доступ к обозначенной переменной в коде проекта вне Webpack
+			new webpack.DefinePlugin({
+				ENV: JSON.stringify(ENV)
+			})
+			//
 			// // автоматически подключает библиотеки, встечающиеся в коде
 			// new webpack.ProvidePlugin({
 			// 	$: 'jquery',
 			// 	jQuery: 'jquery'
 			// 	})
-			//
-			// доступ к обозначенной переменной в коде проекта вне Webpack
-			new webpack.DefinePlugin({
-				ENV: JSON.stringify(ENV)
-			})
 		],
 	},
 	pug(),

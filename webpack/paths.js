@@ -21,14 +21,14 @@ module.exports = function() {
 		dist: {
 			path     : 'dist/',
 			js       : 'js/',
-			js_file  : '[name].[hash].js', // name берёт название ярлыка - т.е. "app"
+			js_file  : '[name].[chunkhash].js', // name берёт название ярлыка - т.е. "app"
 			css      : 'css/',
-			css_file : '[name].[hash].css',
+			css_file : '[name].[hash].css', // возможно вместо [hash] - [contenthash]
 			img      : 'images/',
 			fonts    : 'fonts/'
 		},
 		config: {
-			postcss  : 'webpack/postcss.config.js'
+			postcss  : 'webpack/'
 		}
 	}
 };

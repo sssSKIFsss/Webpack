@@ -1,5 +1,8 @@
 const webpack = require('webpack');
 const CssExtractPlugin = require('mini-css-extract-plugin');
+// noinspection JSUnresolvedVariable
+const ENV = require('yargs').argv.env;
+
 const PATHS = require('./paths')();
 
 module.exports = function () {
@@ -10,11 +13,18 @@ module.exports = function () {
 				exclude: /(node_modules|webpack|dist|images|fonts|pug|js)/,
 				use: [
 					"style-loader",
-					CssExtractPlugin.loader,
 					{
+						loader: CssExtractPlugin.loader,
+						// options: {
+						// 	// hmr: ENV ==='development'
+						// }
+					},{
 						loader: "css-loader",
-						options: {sourceMap: true}
-					}, {
+						options: {
+							sourceMap: true,
+							importLoaders: 2 // postcss & resolve-url loaders used
+						}
+					},{
 						loader: 'postcss-loader',
 						options: {
 							sourceMap: true,
@@ -22,6 +32,12 @@ module.exports = function () {
 								path: PATHS.project + PATHS.config.postcss
 							}
 						}
+					},{
+						// для перезаписи путей используется resolve-url-loader
+						loader: 'resolve-url-loader',
+							options: {
+							sourceMap: true
+							}
 					}
 				]
 			},{
@@ -32,7 +48,10 @@ module.exports = function () {
 					CssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
-						options: {sourceMap: true}
+						options: {
+							importLoaders: 3, // postcss & resolve-url & sass loaders used
+							sourceMap: true
+						}
 					},{
 						loader: 'postcss-loader',
 						options: {
@@ -40,6 +59,12 @@ module.exports = function () {
 							config: {
 								path: PATHS.project + PATHS.config.postcss
 							}
+						}
+					},{
+						// для перезаписи путей используется resolve-url-loader
+						loader: 'resolve-url-loader',
+						options: {
+							sourceMap: true
 						}
 					},{
 						loader: 'sass-loader',

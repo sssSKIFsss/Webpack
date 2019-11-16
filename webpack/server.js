@@ -8,7 +8,8 @@ module.exports = function () {
 			overlay: {
 				warning: true, // вывод ошибок в браузер
 				error: true // вывод ошибок в браузер
-			}
+			},
+			// hot: true
 		},
 		watchOptions: { aggregateTimeout: 100 }
 	}
