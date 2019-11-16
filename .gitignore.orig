@@ -1,0 +1,16 @@
+.idea/
+node_modules/
+bower_components/
+<<<<<<< HEAD
+node_modules/
+build/
+dist/
+=======
+dist/
+build/
+>>>>>>> loftschool
+temp/
+tmp/
+login.txt
+tags
+package-lock.json

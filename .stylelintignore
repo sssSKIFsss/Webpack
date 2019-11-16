@@ -1,0 +1,9 @@
+build/
+gulp_tasks/
+manifest/
+node_modules/
+src/fonts/
+src/images/
+src/js/
+src/maket/
+

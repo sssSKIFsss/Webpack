@@ -4,7 +4,7 @@
 // const service = new AppService('Hello AppService');
 // service.log();
 
-// import {config} from './modules/config';
+// import {config} from './modules/config'; - extract config
 // console.log('Config key:', config.key);
 
 // React example
@@ -15,5 +15,4 @@
 
 import './styles/css/index.css';
 import './styles/scss/index.scss';
-import './js';
-window.jQuery = require('jquery');
+import './js/main';

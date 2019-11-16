@@ -1,0 +1,12 @@
+extends ../layouts/main.pug
+
+block variables
+  - var title = 'Admin page';
+  - var pageClass = 'admin-page';
+
+block content
+  section
+    .container
+      +item('Hello on Admin page!', 'This page is place for castomization of environment')
+  //script
+  //  adm.getmode('isdevelopment')
