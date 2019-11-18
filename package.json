@@ -41,7 +41,6 @@
     "path": "^0.12.7",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "postcss-resolve-url": "0.0.1",
     "pug": "^2.0.4",
     "pug-lint-loader": "0.0.4",
     "pug-loader": "^2.4.0",

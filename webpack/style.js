@@ -35,9 +35,7 @@ module.exports = function () {
 					},{
 						// для перезаписи путей используется resolve-url-loader
 						loader: 'resolve-url-loader',
-							options: {
-							sourceMap: true
-							}
+						options: { sourceMap: true }
 					}
 				]
 			},{

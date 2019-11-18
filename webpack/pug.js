@@ -26,7 +26,7 @@ module.exports = function () {
 		},
 		plugins: [
 			...PAGES.map(page => new HtmlPlugin({
-				inject: false,
+				//inject: false, false, если собираемся вручную встраивать в html sripts and links
 				hash: true,
 				template: `${PAGES_DIR}/${page}`, // pug
 				filename: `./${page.replace(/\.pug/, '.html')}`

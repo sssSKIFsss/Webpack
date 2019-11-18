@@ -8,18 +8,18 @@ block content
   section
     .container
       +item('Hello Item!', 'This is first view on Items')
-      img(src=require('~/images/img2.jpg') width='100' alt='men')
+      img(src=require('../../images/img2.jpg') width='100' alt='men')
   section
     .container
       +item('Hello pug!', 'Jade - node template engine')
-      img(src=require('~/images/img3.jpg') width='100' alt='women')
+      img(src=require('../../images/img3.jpg') width='100' alt='women')
   section
     .container
       +item('Hello Webpack!', 'Webpack - engine for collecting files')
-      img(src=require('~/images/img2.jpg') width='100' alt='men')
+      img(src=require('../../images/img2.jpg') width='100' alt='men')
   button(id='login_button') This is a test!
   //script
   //  app.welcome("something about index.pug?")
 
   // возможно пригодится :
-  script(src='<%= htmlWebpackPlugin.files.chunks.main.entry %>')
+  //script(src='<%= htmlWebpackPlugin.files.chunks.main.entry %>')
