@@ -1,5 +1,9 @@
 'use strict';
 
+const path = require('path');
+const PATHS = require('./paths')();
+
+
 // eslint-loader TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -8,7 +12,10 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.js$/,
-				exclude: /(node_modules|webpack|images|fonts|pug|styles)/,
+				include: [
+					path.resolve(PATHS.src, PATHS.src_js),
+					path.resolve(PATHS.src, PATHS.src_components)
+				],
 				use: {
 					loader: 'babel-loader'
 				}

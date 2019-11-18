@@ -1,7 +1,8 @@
+const path = require('path');
 const webpack = require('webpack');
 const CssExtractPlugin = require('mini-css-extract-plugin');
 // noinspection JSUnresolvedVariable
-const ENV = require('yargs').argv.env;
+// const ENV = require('yargs').argv.env;
 
 const PATHS = require('./paths')();
 
@@ -10,7 +11,10 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.css$/,
-				exclude: /(node_modules|webpack|dist|images|fonts|pug|js)/,
+				include: [
+					path.resolve(PATHS.src, PATHS.src_css),
+					path.resolve(PATHS.src, PATHS.src_components)
+				],
 				use: [
 					"style-loader",
 					{
@@ -29,7 +33,7 @@ module.exports = function () {
 						options: {
 							sourceMap: true,
 							config: {
-								path: PATHS.project + PATHS.config.postcss
+								path: path.resolve(PATHS.config)
 							}
 						}
 					},{
@@ -40,7 +44,10 @@ module.exports = function () {
 				]
 			},{
 				test: /\.scss$/,
-				exclude: /(node_modules|webpack|dist|images|fonts|pug|js)/,
+				include: [
+					path.resolve(PATHS.src, PATHS.src_scss),
+					path.resolve(PATHS.src, PATHS.src_components)
+				],
 				use: [
 					"style-loader",
 					CssExtractPlugin.loader,
@@ -55,7 +62,7 @@ module.exports = function () {
 						options: {
 							sourceMap: true,
 							config: {
-								path: PATHS.project + PATHS.config.postcss
+								path: path.resolve(PATHS.config)
 							}
 						}
 					},{
@@ -76,7 +83,7 @@ module.exports = function () {
 				filename: '[file].map'
 			}),
 			new CssExtractPlugin({
-				filename: PATHS.dist.css + PATHS.dist.css_file
+				filename: path.join(PATHS.dist_css, PATHS.dist_css_file)
 			})
 		]
 	}

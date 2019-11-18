@@ -1,3 +1,4 @@
+const path = require('path');
 const PATHS = require('./paths')();
 
 module.exports = function () {
@@ -5,14 +6,12 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-				exclude: /(node_modules|webpack|dist|images|pug|js|styles)/,
-				// include: PATHS.project + PATHS.src.paths + PATHS.src.fonts,
-				 //include: PATHS.project + PATHS.src.path + PATHS.src.fonts,
+				include: path.resolve(PATHS.src, PATHS.src_fonts),
 				use: [{
 					loader: 'file-loader',
 					options: {
 						name: '[name].[ext]',
-						outputPath: PATHS.dist.fonts,
+						outputPath: PATHS.dist_fonts,
 						useRelativePath: true
 					}
 				}]

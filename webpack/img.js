@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+// noinspection JSUnresolvedVariable
 const ENV = require('yargs').argv.env;
 const PATHS = require('./paths')();
 
@@ -8,14 +10,18 @@ module.exports = () => {
 		module: {
 			rules: [{
 				test: /\.(png|jpe?g|gif|svg)$/,
-				exclude: /(node_modules|webpack|dist|fonts|pug|js|styles)/,
+				include: [
+					path.resolve(PATHS.src, PATHS.src_img),
+					path.resolve(PATHS.src, PATHS.src_components)
+				],
 				use: [{
 					// url-loader с опцией limit позволяет настроить загрузку как
 					// DataURL, если изображение меньше лимита, и как URL, если больше
 					loader: 'url-loader',
 					options: {
 						name: '[name].[ext]',
-						outputPath: PATHS.dist.img,
+						// outputPath: PATHS.dist_img,
+						outputPath: path.join(PATHS.dist_img),
 						useRelativePath: true,
 						limit: 1024
 					}

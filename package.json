@@ -17,6 +17,7 @@
     "serv": "static dist"
   },
   "dependencies": {
+    "bem-components": "^5.1.1",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "normalize.css": "^8.0.1",

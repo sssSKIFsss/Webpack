@@ -1,8 +1,9 @@
 const fs = require('fs');
+const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const PATHS = require('./paths')();
 
-const PAGES_DIR = PATHS.project + PATHS.src.path + PATHS.src.pug;
+const PAGES_DIR = path.resolve(PATHS.src, PATHS.src_pug);
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'));
 
 module.exports = function () {
@@ -10,7 +11,10 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.pug$/,
-				exclude: /(node_modules|webpack|dist|images|fonts|js|styles)/,
+				include: [
+					path.resolve(PATHS.src, PATHS.src_pug),
+					path.resolve(PATHS.src, PATHS.src_components)
+				],
 				use: [
 					{
 						loader: 'pug-loader',

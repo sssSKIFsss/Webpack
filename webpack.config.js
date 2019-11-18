@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const WebpackMd5Hash = require('webpack-md5-hash');
@@ -7,24 +8,23 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const ENV = require('yargs').argv.env;
 
 const PATHS = require('./webpack/paths')();
-const server = require('./webpack/server');
 const pug = require('./webpack/pug');
 const style = require('./webpack/style');
+const js = require('./webpack/js');
 const clear = require('./webpack/clear');
 const copy = require('./webpack/copy');
 const img = require('./webpack/img');
-const js = require('./webpack/js');
 const font = require('./webpack/font');
+const server = require('./webpack/server');
 
 const commonConfig = merge([
 	{
-		//The base directory, an absolute path, for resolving entry points
-		// and loaders from configuration
-		context: PATHS.project + PATHS.src.path,
+		context: path.resolve(__dirname, PATHS.src),
 		entry: {
-			app:    "./" + PATHS.src.js_entry1,
-			adm:    "./" + PATHS.src.js_entry2,
-			vendors: PATHS.src.js_entry_vendors
+			app: PATHS.entry1,
+			adm: PATHS.entry2,
+			vendors: PATHS.entry_vendors
+
 			// 1.entry-строка - одна точка входа
 			//   entry: './index.js'
 			// 2.entry-массив - несколько точек входа
@@ -43,20 +43,23 @@ const commonConfig = merge([
 		},
 
 		output: {
-			path: PATHS.project + PATHS.dist.path,
-			filename: PATHS.dist.js + PATHS.dist.js_file,
-			publicPath: '/',
+			path: path.resolve(__dirname, PATHS.dist),
+			filename: path.join(PATHS.dist_js, PATHS.dist_js_file),
+			publicPath: '',
 			library: "[name]"
 		},
-
-		// externals: { paths: PATHS },
 
 		devtool: ENV === 'development' ? 'eval' : false,
 		mode : ENV === 'production' ? 'production' : 'development',
 
 		resolve: {
 			alias: {
-				'~': PATHS.project + PATHS.src.path
+				'~': path.resolve(__dirname, PATHS.src),
+				'~pug': path.resolve(__dirname, PATHS.src, PATHS.src_pug),
+				'~js': path.resolve(__dirname, PATHS.src, PATHS.src_js),
+				'~css': path.resolve(__dirname, PATHS.src, PATHS.src_css),
+				'~scss': path.resolve(__dirname, PATHS.src, PATHS.src_scss),
+				'~img': path.resolve(__dirname, PATHS.src, PATHS.src_img)
 			}
 		},
 
