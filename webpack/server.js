@@ -1,9 +1,10 @@
+const path = require('path');
 const PATHS = require('./paths')();
 
 module.exports = function () {
 	return {
 		devServer: {
-			contentBase: PATHS.project + PATHS.dist.path,
+			contentBase: path.resolve(__dirname, PATHS.dist),
 			port: 8081,
 			overlay: {
 				warning: true, // вывод ошибок в браузер

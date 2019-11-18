@@ -5,7 +5,7 @@ module.exports = function() {
 	return {
 		entry1        : './index.js',
 		entry2        : './adminka.js',
-		entry_vendors : ['jquery', 'bootstrap'],
+		entry_vendors : ['jquery', 'bootstrap'], // bootstrap описан на сайте bootstrap
 		src           : 'src',
 		src_pug       : 'pug/pages',
 		src_js        : 'js',

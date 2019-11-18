@@ -49,6 +49,8 @@ const commonConfig = merge([
 			library: "[name]"
 		},
 
+		externals: { isDevelopment: ENV === 'development' },
+
 		devtool: ENV === 'development' ? 'eval' : false,
 		mode : ENV === 'production' ? 'production' : 'development',
 
