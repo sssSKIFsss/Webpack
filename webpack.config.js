@@ -45,6 +45,7 @@ const commonConfig = merge([
 		output: {
 			path: path.resolve(__dirname, PATHS.dist),
 			filename: path.join(PATHS.dist_js, PATHS.dist_js_file),
+			chunkFilename: path.join(PATHS.dist_js, PATHS.dist_js_file),
 			publicPath: '',
 			library: "[name]"
 		},
