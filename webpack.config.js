@@ -67,6 +67,7 @@ const commonConfig = merge([
 		},
 
 		optimization: {
+			// chunkIds: 'natural',
 			splitChunks: { // деление файла js на app и vendors
 				cacheGroups: {
 					vendors: { // например, для подключения jquery, bootstrap
