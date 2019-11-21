@@ -16,24 +16,24 @@ module.exports = (ctx) => {
 			// 'postcss-next': {
 			// 	browsers: ['last 2 version', '>5%']
 			// },
-			'autoprefixer': {},
-			'css-mqpacker': {},
 			// 'stylelint': {},
 			// 'UnCSS' : {}, разобраться как работает с pug
 
 
-			// ...ctx.options.ENV !== 'production' ? {
-			// 	cssnano: {
-			// 		preset: [
-			// 			'default',
-			// 			{
-			// 				discardComments: {
-			// 					removeAll: true
-			// 				}
-			// 			}
-			// 		]
-			// 	},
-			// }:{}
+			...ctx.options.env === 'production' ? {
+				autoprefixer: {},
+				'css-mqpacker': {},
+				cssnano: {
+					preset: [
+						'default',
+						{
+							discardComments: {
+								removeAll: true
+							}
+						}
+					]
+				},
+			}:{}
 
 
 		}

@@ -5,7 +5,7 @@
 
 async function getTemplate(message) {
 	try {
-		let template = await import('./modules/dynamic_block');
+		let template = await import(/* webpackChunkName: "" */ './modules/dynamic_block');
 		alert(JSON.stringify(template)+" "+message);
 	} catch(err) {
 		console.error("template error");

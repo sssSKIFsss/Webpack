@@ -5,10 +5,6 @@
   "main": "home.js",
   "author": "skif",
   "license": "ISC",
-  "browserslist": [
-    "> 1%",
-    "last 3 version"
-  ],
   "scripts": {
     "dev": "webpack-dev-server --env development --open --color",
     "prod": "webpack --env production --color",

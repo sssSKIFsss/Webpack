@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const HtmlPlugin = require('html-webpack-plugin');
 const FaviconWebpackPlugin = require('favicons-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PATHS = require('./paths')();
 
 const PAGES_DIR = path.resolve(PATHS.src, PATHS.src_pug);
@@ -31,7 +30,7 @@ module.exports = function () {
 			}]
 		},
 		plugins: [
-			...PAGES.map(page => new HtmlPlugin({
+			...PAGES.map(page => new HtmlWebpackPlugin({
 				inject: false,
 				template: `${PAGES_DIR}/${page}`, // pug
 				filename: `./${page.replace(/\.pug/, '.html')}`
