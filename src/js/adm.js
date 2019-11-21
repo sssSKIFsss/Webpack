@@ -13,7 +13,3 @@ getMode(ENV === 'development');
 
 //
 // exports.getMode = getMode;
-
-
-
-

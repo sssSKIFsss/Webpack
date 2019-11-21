@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CssExtractPlugin = require('mini-css-extract-plugin');
 // noinspection JSUnresolvedVariable
-// const ENV = require('yargs').argv.env;
+const ENV = require('yargs').argv.env;
 
 const PATHS = require('./paths')();
 
@@ -33,7 +33,8 @@ module.exports = function () {
 						options: {
 							sourceMap: true,
 							config: {
-								path: path.resolve(PATHS.config)
+								path: path.resolve(PATHS.config),
+								ctx: {env: ENV}
 							}
 						}
 					},{

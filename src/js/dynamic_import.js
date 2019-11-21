@@ -10,6 +10,7 @@ async function getTemplate(message) {
 	} catch(err) {
 		console.error("template error");
 		return new Error(err);
+
 	}
 }
 

@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+// const FaviconWebpackPlugin = require('favicons-webpack-plugin');
 // noinspection JSUnresolvedVariable
 const ENV = require('yargs').argv.env;
 const PATHS = require('./paths')();

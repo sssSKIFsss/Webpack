@@ -12,6 +12,7 @@ module.exports = function() {
 		src_css       : 'styles/css',
 		src_scss      : 'styles/scss',
 		src_img       : 'images',
+		src_favicon   : 'favicon/favicon.png',
 		src_fonts     : 'fonts',
 		src_components: 'components',
 		src_htaccess  : '.htaccess',
@@ -21,6 +22,7 @@ module.exports = function() {
 		dist_css      : 'css',
 		dist_css_file : '[name].[hash].css', // возможно вместо [hash] - [contenthash]
 		dist_img      : 'img',
+		dist_favicon  : 'favicon',
 		dist_fonts    : 'fonts',
 		config        : 'webpack'
 	}

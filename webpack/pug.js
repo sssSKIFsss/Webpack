@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
+const FaviconWebpackPlugin = require('favicons-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PATHS = require('./paths')();
 
@@ -52,11 +53,16 @@ module.exports = function () {
 			// 	chunksSortMode: 'manual',
 			// 	chunks: ['adm', 'common', 'vendors'],
 			// }),
+			new FaviconWebpackPlugin({
+				logo: path.resolve(PATHS.src, PATHS.src_img, PATHS.src_favicon),
+				outputPath: path.join(PATHS.dist_img, PATHS.dist_favicon),
+				prefix: path.join(PATHS.dist_img, PATHS.dist_favicon),
+				inject: 'force'
+			})
 		]
 	}
 };
 
 // Возможно понадобятся следующие плагины
-// favicon-webpack-plugin
 // html-webpack-injector
 // html-webpack-template-pug
