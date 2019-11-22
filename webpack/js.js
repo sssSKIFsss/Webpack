@@ -1,11 +1,9 @@
 'use strict';
 
 const path = require('path');
-const PATHS = require('./paths')();
-
+const PATHS = require('./paths');
 
 // eslint-loader TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 module.exports = function () {
 	return {

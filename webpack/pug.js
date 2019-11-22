@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const FaviconWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PATHS = require('./paths')();
+const PATHS = require('./paths');
 
 const PAGES_DIR = path.resolve(PATHS.src, PATHS.src_pug);
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'));
@@ -36,22 +36,22 @@ module.exports = function () {
 				filename: `./${page.replace(/\.pug/, '.html')}`
 			})),
 			// либо так
-			// new htmlWebpackPlugin({
-			// 	filename: 'index.html',
-			// 	title: "Main Page",
-			// 	//favicon: 'favicon.ico',
-			// 	template: `${PAGES_DIR}/index.pug`,
-			// 	chunksSortMode: 'manual',
-			// 	chunks: ['app', 'common', 'vendors'],
-			// }),
-			// new htmlWebpackPlugin({
-			// 	filename: 'adm.html',
-			// 	title: "Adm Page",
-			// 	//favicon: 'favicon.ico',
-			// 	template: `${PAGES_DIR}/admin.pug`,
-			// 	chunksSortMode: 'manual',
-			// 	chunks: ['adm', 'common', 'vendors'],
-			// }),
+				// new htmlWebpackPlugin({
+				// 	filename: 'index.html',
+				// 	title: "Main Page",
+				// 	//favicon: 'favicon.ico',
+				// 	template: `${PAGES_DIR}/index.pug`,
+				// 	chunksSortMode: 'manual',
+				// 	chunks: ['app', 'common', 'vendors'],
+				// }),
+				// new htmlWebpackPlugin({
+				// 	filename: 'adm.html',
+				// 	title: "Adm Page",
+				// 	//favicon: 'favicon.ico',
+				// 	template: `${PAGES_DIR}/admin.pug`,
+				// 	chunksSortMode: 'manual',
+				// 	chunks: ['adm', 'common', 'vendors'],
+				// }),
 			new FaviconWebpackPlugin({
 				logo: path.resolve(PATHS.src, PATHS.src_img, PATHS.src_favicon),
 				outputPath: path.join(PATHS.dist_img, PATHS.dist_favicon),

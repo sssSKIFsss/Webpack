@@ -1,5 +1,5 @@
 const path = require('path');
-const PATHS = require('./paths')();
+const PATHS = require('./paths');
 
 module.exports = function () {
 	return {

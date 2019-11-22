@@ -1,12 +1,9 @@
 'use strict';
 
 const path = require('path');
-// const FaviconWebpackPlugin = require('favicons-webpack-plugin');
-// noinspection JSUnresolvedVariable
-const ENV = require('yargs').argv.env;
-const PATHS = require('./paths')();
+const PATHS = require('./paths');
 
-module.exports = () => {
+module.exports = (mode) => {
 	return {
 		module: {
 			rules: [{
@@ -16,8 +13,6 @@ module.exports = () => {
 					path.resolve(PATHS.src, PATHS.src_components)
 				],
 				use: [{
-					// url-loader с опцией limit позволяет настроить загрузку как
-					// DataURL, если изображение меньше лимита, и как URL, если больше
 					loader: 'url-loader',
 					options: {
 						name: '[name].[ext]',
@@ -26,7 +21,7 @@ module.exports = () => {
 						useRelativePath: true,
 						limit: 1024
 					}
-				}].concat(ENV === 'development' ? [] : [{
+				}].concat(mode === 'development' ? [] : [{
 					// minify png, jpeg, gif, svg and webp images with imagemin
 					loader: 'image-webpack-loader',
 					options: {
