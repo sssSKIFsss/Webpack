@@ -1,5 +1,5 @@
 'use strict';
-// import './menu.scss';
+import './menu.scss';
 import template from './menu.pug';
 
 export default  class Menu {

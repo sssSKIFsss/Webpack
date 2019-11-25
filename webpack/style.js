@@ -1,5 +1,5 @@
 const path = require('path');
-//const webpack = require('webpack');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PATHS = require('./paths');
 
@@ -78,9 +78,9 @@ module.exports = function (mode) {
 			}]
 		},
 		plugins: [
-			// new webpack.SourceMapDevToolPlugin({
-			// 	filename: '[file].map'
-			// }),
+			new webpack.SourceMapDevToolPlugin({
+				filename: '[file].map'
+			}),
 			new MiniCssExtractPlugin({
 				filename: path.join(PATHS.dist_css, PATHS.dist_css_file)
 			})

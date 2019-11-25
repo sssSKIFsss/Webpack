@@ -12,7 +12,7 @@ const font = require('./webpack/font');
 const img = require('./webpack/img');
 const js = require('./webpack/js');
 const pug = require('./webpack/pug');
-//const style = require('./webpack/style');
+const style = require('./webpack/style');
 
 module.exports = env => {
 	return merge([
@@ -100,6 +100,6 @@ module.exports = env => {
 		img(env),
 		pug(),
 		js(),
-		// style(env)
+		style(env)
 	])
 };
