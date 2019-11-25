@@ -2,27 +2,31 @@
 
 async function showMenu() {
 	try {
-		let menu = await import(/* webpackChunkName: "menuButton" */ '~components/menu');
-		let homeMenu = new menu.default({
+		// eslint-disable-next-line
+		let menuID = await import(/* webpackChunkName: "menuButton" */ '~components/menu');
+		let Menu = menuID.default;
+		let homeMenu = new Menu({
 			title: 'Комнаты дома',
 			items: [{
 				text: 'Детская',
 				href: '#childroom'
-			},{
+			}, {
 				text: 'Кухня',
 				href: '#kitchen'
-			},{
+			}, {
 				text: 'Гостиная',
 				href: '#guestroom'
 			}]
 		});
-		document.body.appendChild(homeMenu.elem);
-	} catch(err) {
-		console.error("menu error");
+		return document.body.appendChild(homeMenu.elem);
+	} catch (err) {
+		// eslint-disable-next-line
+		console.error('menu error');
 		return new Error(err);
 	}
 }
 
 document.getElementById('menuButton').onclick = function () {
+	// noinspection JSIgnoredPromiseFromCall
 	showMenu();
 };

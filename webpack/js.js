@@ -11,13 +11,11 @@ module.exports = function () {
 			rules: [{
 				test: /\.js$/,
 				include: [
-					path.resolve(PATHS.src, PATHS.src_js),
-					path.resolve(PATHS.src, PATHS.src_components)
+					path.resolve(PATHS.src, PATHS.srcJS),
+					path.resolve(PATHS.src, PATHS.srcComponents)
 				],
-				use: {
-					loader: 'babel-loader'
-				}
+				use: ['babel-loader', 'eslint-loader']
 			}]
 		}
-	}
+	};
 };

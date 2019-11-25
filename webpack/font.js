@@ -6,16 +6,16 @@ module.exports = function () {
 		module: {
 			rules: [{
 				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-				include: path.resolve(PATHS.src, PATHS.src_fonts),
+				include: path.resolve(PATHS.src, PATHS.srcFonts),
 				use: [{
 					loader: 'file-loader',
 					options: {
 						name: '[name].[ext]',
-						outputPath: PATHS.dist_fonts,
+						outputPath: PATHS.distFonts,
 						useRelativePath: true
 					}
 				}]
 			}]
 		}
-	}
+	};
 };

@@ -1,5 +1,5 @@
 'use strict';
-
+//
 const path = require('path');
 const PATHS = require('./paths');
 
@@ -9,18 +9,18 @@ module.exports = (mode) => {
 			rules: [{
 				test: /\.(png|jpe?g|gif|svg)$/,
 				include: [
-					path.resolve(PATHS.src, PATHS.src_img),
-					path.resolve(PATHS.src, PATHS.src_components)
+					path.resolve(PATHS.src, PATHS.srcImg),
+					path.resolve(PATHS.src, PATHS.srcComponents)
 				],
 				exclude: [
-					path.resolve(PATHS.src, PATHS.src_img, PATHS.src_favicon)
+					path.resolve(PATHS.src, PATHS.srcImg, PATHS.srcFavicon)
 				],
 				use: [{
 					loader: 'url-loader',
 					options: {
 						name: '[name].[ext]',
 						// outputPath: PATHS.dist_img,
-						outputPath: path.join(PATHS.dist_img),
+						outputPath: path.join(PATHS.distImg),
 						useRelativePath: true,
 						limit: 1024
 					}
@@ -32,14 +32,14 @@ module.exports = (mode) => {
 							quality: 70
 						},
 						optipng: {
-							enabled: false,
+							enabled: false
 						},
 						pngquant: {
 							quality: [0.65, 0.90],
 							speed: 4
 						},
 						gifsicle: {
-							interlaced: false,
+							interlaced: false
 						},
 						webp: {
 							quality: 75

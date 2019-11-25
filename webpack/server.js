@@ -7,16 +7,14 @@ module.exports = function () {
 			contentBase: path.resolve(__dirname, PATHS.dist),
 			port: 8081,
 			overlay: {
-				warning: true, // вывод ошибок в браузер
-				error: true // вывод ошибок в браузер
+				// вывод ошибок и предуперждений в браузер
+				warning: true,
+				error: true
 			},
 			open: true
 
-
-
-
 			// hot: true
-		},
+		}
 		// watchOptions: { aggregateTimeout: 100 }
-	}
+	};
 };

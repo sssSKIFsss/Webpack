@@ -9,23 +9,24 @@ module.exports = function (mode) {
 			rules: [{
 				test: /\.css$/,
 				include: [
-					path.resolve(PATHS.src, PATHS.src_css),
-					path.resolve(PATHS.src, PATHS.src_components)
+					path.resolve(PATHS.src, PATHS.srcCSS),
+					path.resolve(PATHS.src, PATHS.srcComponents)
 				],
 				use: [
-					"style-loader",
+					'style-loader',
 					{
-						loader: MiniCssExtractPlugin.loader,
+						loader: MiniCssExtractPlugin.loader
 						// options: {
 						// 	// hmr: ENV ==='development'
 						// }
-					},{
-						loader: "css-loader",
+					}, {
+						loader: 'css-loader',
 						options: {
 							sourceMap: true,
-							importLoaders: 2 // postcss & resolve-url loaders used
+							// postcss & resolve-url loaders used
+							importLoaders: 2
 						}
-					},{
+					}, {
 						loader: 'postcss-loader',
 						options: {
 							sourceMap: true,
@@ -34,28 +35,29 @@ module.exports = function (mode) {
 								ctx: {mode: mode}
 							}
 						}
-					},{
+					}, {
 						// для перезаписи путей используется resolve-url-loader
 						loader: 'resolve-url-loader',
 						options: { sourceMap: true }
 					}
 				]
-			},{
+			}, {
 				test: /\.scss$/,
 				include: [
-					path.resolve(PATHS.src, PATHS.src_scss),
-					path.resolve(PATHS.src, PATHS.src_components)
+					path.resolve(PATHS.src, PATHS.srcSCSS),
+					path.resolve(PATHS.src, PATHS.srcComponents)
 				],
 				use: [
-					"style-loader",
+					'style-loader',
 					MiniCssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
 						options: {
-							importLoaders: 3, // postcss & resolve-url & sass loaders used
+							// postcss & resolve-url & sass loaders used
+							importLoaders: 3,
 							sourceMap: true
 						}
-					},{
+					}, {
 						loader: 'postcss-loader',
 						options: {
 							sourceMap: true,
@@ -64,13 +66,13 @@ module.exports = function (mode) {
 								ctx: {mode: mode}
 							}
 						}
-					},{
+					}, {
 						// для перезаписи путей используется resolve-url-loader
 						loader: 'resolve-url-loader',
 						options: {
 							sourceMap: true
 						}
-					},{
+					}, {
 						loader: 'sass-loader',
 						options: { sourceMap: true}
 					}
@@ -82,10 +84,10 @@ module.exports = function (mode) {
 				filename: '[file].map'
 			}),
 			new MiniCssExtractPlugin({
-				filename: path.join(PATHS.dist_css, PATHS.dist_css_file)
+				filename: path.join(PATHS.distCSS, PATHS.distCssFile)
 			})
 		]
-	}
+	};
 };
 
 // вариант:

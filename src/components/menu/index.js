@@ -2,7 +2,7 @@
 import './menu.scss';
 import template from './menu.pug';
 
-export default  class Menu {
+export default class Menu {
 	constructor(options) {
 		this.elem = document.createElement('dev');
 		this.elem.className = 'menu';

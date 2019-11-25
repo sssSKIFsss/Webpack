@@ -1,2 +1,3 @@
 let add = (a, b) => a + b;
-console.log( add(2, 5) );
+// eslint-disable-next-line
+console.log(add(2, 5));

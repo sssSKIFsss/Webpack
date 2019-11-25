@@ -20,41 +20,42 @@ module.exports = env => {
 			entry: {
 				app: PATHS.entry1,
 				adm: PATHS.entry2,
-				// vendors: PATHS.entry_vendors
+				vendors: PATHS.entryVendors
 			},
 			output: {
 				path: path.resolve(__dirname, PATHS.dist),
-				filename: path.join(PATHS.dist_js, PATHS.dist_js_file),
-				chunkFilename: path.join(PATHS.dist_js, PATHS.dist_js_chunk),
-				publicPath: '',
+				filename: path.join(PATHS.distJS, PATHS.distJsFile),
+				chunkFilename: path.join(PATHS.distJS, PATHS.distJsChunk),
+				publicPath: ''
 				//library: 'app' - работает, library: '[name]' - не всегда работает
 			},
 
 			devtool: env === 'development' ? 'cheap-module-eval-source-map' : false,
-			mode : env === 'production' ? 'production' : 'development',
+			mode: env === 'production' ? 'production' : 'development',
 			// externals: { isDevelopment: env === 'development' },
 			resolve: {
 				alias: {
 					// '~': path.resolve(__dirname, PATHS.src),
-					'~pug': path.resolve(__dirname, PATHS.src, PATHS.src_pug),
-					'~js': path.resolve(__dirname, PATHS.src, PATHS.src_js),
-					'~css': path.resolve(__dirname, PATHS.src, PATHS.src_css),
-					'~scss': path.resolve(__dirname, PATHS.src, PATHS.src_scss),
-					'~img': path.resolve(__dirname, PATHS.src, PATHS.src_img),
-					'~components': path.resolve(__dirname, PATHS.src, PATHS.src_components)
+					'~pug': path.resolve(__dirname, PATHS.src, PATHS.srcPug),
+					'~js': path.resolve(__dirname, PATHS.src, PATHS.srcJS),
+					'~css': path.resolve(__dirname, PATHS.src, PATHS.srcCSS),
+					'~scss': path.resolve(__dirname, PATHS.src, PATHS.srcSCSS),
+					'~img': path.resolve(__dirname, PATHS.src, PATHS.srcImg),
+					'~components': path.resolve(__dirname, PATHS.src, PATHS.srcComponents)
 				}
 			},
 
 			optimization: {
-				splitChunks: { // деление файла js на app, vendors и common
+				// деление файла js на app, vendors и common
+				splitChunks: {
 					cacheGroups: {
-						vendors: { // например, для подключения jquery, bootstrap
+						vendors: {
 							name: 'vendors',
 							test: /node_modules/,
 							chunks: 'all',
 							enforce: true
 						},
-						common: { // создание общих для разных файлов модулей
+						common: {
 							name: 'common',
 							chunks: 'initial',
 							minChunks: 2,
@@ -63,33 +64,23 @@ module.exports = env => {
 						}
 					}
 				},
-
-			// запрет компиляции бандла при ошибке
-			noEmitOnErrors: true
-
+				// запрет компиляции бандла при ошибке
+				noEmitOnErrors: true
 			},
 
-			// // ускорение сборки отменой парсинга файлов больших библиотек, которые в этом случае
-			// // не должны содержать require, import, define и др. механизмы импорта
-			// module: {
-			// 	noParse: /jquery|bootstrap|popper.js/
-			// },
+			// ускорение сборки отменой парсинга файлов больших библиотек,
+			// которые в этом случае не должны содержать require, import, define
+			// и др. механизмы импорта
+			module: {
+				noParse: /jquery|bootstrap|popper.js/
+			},
 
 			plugins: [
-				// // исправление механизма хеширования в именах файлов
-				// new WebpackMd5Hash(),
-
 				// доступ к обозначенной переменной в коде проекта вне Webpack
 				new webpack.DefinePlugin({
 					ENV: JSON.stringify(env)
 				})
-
-				// // автоматически подключает библиотеки, встечающиеся в коде
-				// new webpack.ProvidePlugin({
-				// 	$: 'jquery',
-				// 	jQuery: 'jquery'
-				// 	})
-			],
+			]
 		},
 		env === 'development' ? server() : clear(),
 		copy(),
@@ -98,8 +89,21 @@ module.exports = env => {
 		pug(),
 		js(),
 		style(env)
-	])
+	]);
 };
 
 // может понадобиться:
-// const WebpackMd5Hash = require('webpack-md5-hash');
+//--------------------
+
+/*
+const WebpackMd5Hash = require('webpack-md5-hash');
+new WebpackMd5Hash() // <- в разделе plugins
+*/
+
+/*
+// автоматически подключает библиотеки, встечающиеся в коде
+new webpack.ProvidePlugin({ // <- в раздел plugins
+	$: 'jquery',
+	jQuery: 'jquery'
+	})
+*/
