@@ -3,7 +3,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
-// const WebpackMd5Hash = require('webpack-md5-hash');
 const PATHS = require('./webpack/paths');
 const server = require('./webpack/server');
 const clear = require('./webpack/clear');
@@ -20,7 +19,7 @@ module.exports = env => {
 			context: path.resolve(__dirname, PATHS.src),
 			entry: {
 				app: PATHS.entry1,
-				// adm: PATHS.entry2,
+				adm: PATHS.entry2,
 				// vendors: PATHS.entry_vendors
 			},
 			output: {
@@ -46,31 +45,29 @@ module.exports = env => {
 				}
 			},
 
-			// optimization: {
+			optimization: {
+				splitChunks: { // деление файла js на app, vendors и common
+					cacheGroups: {
+						vendors: { // например, для подключения jquery, bootstrap
+							name: 'vendors',
+							test: /node_modules/,
+							chunks: 'all',
+							enforce: true
+						},
+						common: { // создание общих для разных файлов модулей
+							name: 'common',
+							chunks: 'initial',
+							minChunks: 2,
+							maxInitialRequests: 5,
+							minSize: 0
+						}
+					}
+				},
 
-			// 	// chunkIds: 'natural',
-			// 	splitChunks: { // деление файла js на app и vendors
-			// 		cacheGroups: {
-			// 			vendors: { // например, для подключения jquery, bootstrap
-			// 				name: 'vendors',
-			// 				test: /node_modules/,
-			// 				chunks: 'all',
-			// 				enforce: true
-			// 			},
-			// 			commons: { // создание общих для разных файлов модулей
-			// 				name: 'common',
-			// 				chunks: 'initial',
-			// 				minChunks: 2,
-			// 				maxInitialRequests: 5,
-			// 				minSize: 0
-			// 			}
-			// 		}
-			// 	},
+			// запрет компиляции бандла при ошибке
+			noEmitOnErrors: true
 
-			// // запрет компиляции бандла при ошибке
-			// noEmitOnErrors: true
-
-			// },
+			},
 
 			// // ускорение сборки отменой парсинга файлов больших библиотек, которые в этом случае
 			// // не должны содержать require, import, define и др. механизмы импорта
@@ -103,3 +100,6 @@ module.exports = env => {
 		style(env)
 	])
 };
+
+// может понадобиться:
+// const WebpackMd5Hash = require('webpack-md5-hash');

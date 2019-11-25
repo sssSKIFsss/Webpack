@@ -3,8 +3,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-// const WebpackMd5Hash = require('webpack-md5-hash');
-const PATHS = require('./webpack/paths');
+const webpackmd5hash = require('webpack-md5-hash');
+const paths = require('./webpack/paths');
 const server = require('./webpack/server');
 const clear = require('./webpack/clear');
 const copy = require('./webpack/copy');
@@ -20,21 +20,20 @@ module.exports = env => {
 			context: path.resolve(__dirname, PATHS.src),
 			entry: {
 				app: PATHS.entry1,
-				// adm: PATHS.entry2,
-				// vendors: PATHS.entry_vendors
+				adm: PATHS.entry2,
+				vendors: PATHS.entry_vendors
 			},
 			output: {
 				path: path.resolve(__dirname, PATHS.dist),
 				filename: path.join(PATHS.dist_js, PATHS.dist_js_file),
-				// chunkFilename: path.join(PATHS.dist_js, PATHS.dist_js_chunk),
+				chunkFilename: path.join(PATHS.dist_js, PATHS.dist_js_chunk),
 				publicPath: '',
 				library: "[name]"
 			},
 
 			devtool: env === 'development' ? 'eval' : 'hidden-source-map',
-			// devtool: env === 'development' ? 'eval' : 'hidden-source-map',
 			mode : env === 'production' ? 'production' : 'development',
-			// externals: { isDevelopment: env === 'development' },
+			externals: { isDevelopment: env === 'development' },
 			resolve: {
 				alias: {
 					'~': path.resolve(__dirname, PATHS.src),
@@ -46,29 +45,29 @@ module.exports = env => {
 				}
 			},
 
-			optimization: {
-				// chunkIds: 'natural',
-				splitChunks: { // деление файла js на app и vendors
-					cacheGroups: {
-						vendors: { // например, для подключения jquery, bootstrap
-							name: 'vendors',
-							test: /node_modules/,
-							chunks: 'all',
-							enforce: true
-						},
-						commons: { // создание общих для разных файлов модулей
-							name: 'common',
-							chunks: 'initial',
-							minChunks: 2,
-							maxInitialRequests: 5,
-							minSize: 0
-						}
-					}
-				},
-
-				// запрет компиляции бандла при ошибке
-				noEmitOnErrors: true
-			},
+			// optimization: {
+			// 	// chunkIds: 'natural',
+			// 	splitChunks: { // деление файла js на app и vendors
+			// 		cacheGroups: {
+			// 			vendors: { // например, для подключения jquery, bootstrap
+			// 				name: 'vendors',
+			// 				test: /node_modules/,
+			// 				chunks: 'all',
+			// 				enforce: true
+			// 			},
+			// 			commons: { // создание общих для разных файлов модулей
+			// 				name: 'common',
+			// 				chunks: 'initial',
+			// 				minChunks: 2,
+			// 				maxInitialRequests: 5,
+			// 				minSize: 0
+			// 			}
+			// 		}
+			// 	},
+			//
+			// 	// запрет компиляции бандла при ошибке
+			// 	noEmitOnErrors: true
+			// },
 
 			// // ускорение сборки отменой парсинга файлов больших библиотек, которые в этом случае
 			// // не должны содержать require, import, define и др. механизмы импорта
