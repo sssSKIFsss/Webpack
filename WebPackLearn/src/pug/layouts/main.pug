@@ -1,0 +1,25 @@
+include ../utils/mixins
+block variables
+
+doctype html
+html(lang="ru")
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		title #{title}
+		//title HtmlWebpackPlugin.options.title
+		meta(name="theme-color" content="#fff")
+		meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
+		meta(name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+		link(href=htmlWebpackPlugin.files.css[0] rel="stylesheet")
+		link(href=htmlWebpackPlugin.files.css[1] rel="stylesheet")
+		script(src=htmlWebpackPlugin.files.js[0])
+	body(class=pageClass)
+		.wrapper
+			#app
+				include ../../components/header/header
+				.content-wrapper
+					block content
+				include ../../components/footer/footer
+	script(src=htmlWebpackPlugin.files.js[1])
+	block scripts

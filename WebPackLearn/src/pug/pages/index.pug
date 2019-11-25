@@ -17,10 +17,9 @@ block content
     .container
       +item('Hello Webpack!', 'Webpack - engine for collecting files')
       img(src=require('~img/img2.jpg') width='100' alt='men')
-  button(id='requireButton') dynamic-require test!
-  button(id='importButton') dynamic-import test!
+  button(id='login_button') this is a test!
   //script
   //  app.welcome("something about index.pug?")
 
-  //block scripts
-  //  script(src=htmlWebpackPlugin.files.js[2])
+block scripts
+  script(src=htmlWebpackPlugin.files.js[2])
