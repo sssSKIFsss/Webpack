@@ -1,9 +1,2 @@
-.idea/
-bower_components/
-node_modules/
-build/
-dist/
-temp/
-tmp/
-login.txt
-tags
+node_modules
+.idea

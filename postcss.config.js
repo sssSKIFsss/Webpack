@@ -1,18 +1,16 @@
-'use strict';
-
 module.exports = {
-	plugins: [
-		require('autoprefixer'),
-		require('css-mqpacker'),
-		require('cssnano') ({
-			preset: [
-				'default',
-				{
-					discardComments: {
-						removeAll: true
-					}
-				}
-			]
-		})
-	]
+    plugins: [
+        require('postcss-import')({
+            plugins: [
+                require('stylelint')
+            ]
+        }),
+        require('tailwindcss')('./tailwind.config.js'),
+        require('postcss-preset-env')({
+            autoprefixer: { grid: true },
+            features: {
+                'nesting-rules': true
+            }
+        })
+    ]
 };
