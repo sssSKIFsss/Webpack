@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
 module.exports = (ctx) => {
 	return {
-		ident: 'postcss',
+		ident: "postcss",
 		plugins: {
-			'postcss-import': {},
-			...ctx.options.mode === 'production' ? {
+			"postcss-import": {},
+			...ctx.options.mode === "production" ? {
 				autoprefixer: {},
-				'css-mqpacker': {},
+				"css-mqpacker": {},
 				cssnano: {
 					preset: [
-						'default',
+						"default",
 						{
 							discardComments: {
 								removeAll: true
@@ -23,5 +23,5 @@ module.exports = (ctx) => {
 	};
 };
 
-// 'stylelint': {},
-// 'UnCSS' : {}, разобраться как работает с pug
+// "stylelint": {},
+// "UnCSS" : {}, разобраться как работает с pug

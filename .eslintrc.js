@@ -7,6 +7,7 @@ module.exports = {
 		"jquery": true
   },
 	"parser": "babel-eslint",
+  "extends": "eslint:recommended",
 
   "rules": {
 
@@ -157,7 +158,7 @@ module.exports = {
     "operator-assignment": [0, "never"], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
     "padded-blocks": [1, {"blocks":"never"}], // enforce padding within blocks (off by default)
     "quote-props": [1, "as-needed"], // require quotes around object literal property names (off by default)
-    "quotes": [1, "single"], // specify whether double or single quotes should be used
+    "quotes": [1, "double"], // specify whether double or single quotes should be used
     "semi": [1, "always"], // require or disallow use of semicolons instead of ASI
     "semi-spacing": [1, {"before": false, "after": true}], // enforce spacing before and after semicolons
     "sort-vars": 0, // sort variables within the same declaration block (off by default)

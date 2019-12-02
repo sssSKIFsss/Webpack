@@ -1,7 +1,8 @@
-'use strict';
+"use strict";
 //
-const path = require('path');
-const PATHS = require('./paths');
+const path = require("path");
+const sets = require("../webpack.settings");
+const PATHS = sets.paths;
 
 module.exports = (mode) => {
 	return {
@@ -9,23 +10,23 @@ module.exports = (mode) => {
 			rules: [{
 				test: /\.(png|jpe?g|gif|svg)$/,
 				include: [
-					path.resolve(PATHS.src, PATHS.srcImg),
-					path.resolve(PATHS.src, PATHS.srcComponents)
+					path.resolve(PATHS.srcImg),
+					path.resolve(PATHS.srcComponents)
 				],
 				exclude: [
-					path.resolve(PATHS.src, PATHS.srcImg, PATHS.srcFavicon)
+					path.resolve(PATHS.srcFavicon)
 				],
 				use: [{
-					loader: 'url-loader',
+					loader: "url-loader",
 					options: {
-						name: '[name].[ext]',
+						name: "[name].[ext]",
 						// outputPath: PATHS.dist_img,
 						outputPath: path.join(PATHS.distImg),
 						useRelativePath: true,
 						limit: 1024
 					}
-				}].concat(mode === 'development' ? [] : [{
-					loader: 'image-webpack-loader',
+				}].concat(mode === "development" ? [] : [{
+					loader: "image-webpack-loader",
 					options: {
 						mozjpeg: {
 							progressive: true,

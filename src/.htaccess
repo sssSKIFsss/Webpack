@@ -81,7 +81,7 @@ AddType text/vtt .vtt
         AddOutputFilterByType DEFLATE image/svg+xml
         AddOutputFilterByType DEFLATE image/x-icon
 
-        #For olders browsers which can't handle compression
+        #For olders browsers which can"t handle compression
         BrowserMatch ^Mozilla/4 gzip-only-text/html
         BrowserMatch ^Mozilla/4\.0[678] no-gzip
         BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
@@ -160,7 +160,7 @@ AddType text/vtt .vtt
     ExpiresByType text/x-cross-domain-policy "access plus 1 week"
 </IfModule>
 
-# Alternative caching using Apache's "mod_headers", if it's installed
+# Alternative caching using Apache"s "mod_headers", if it"s installed
 <IfModule mod_headers.c>
     # 1 sec - HTML
     <FilesMatch "\.(html|htm)$">
@@ -183,7 +183,7 @@ AddType text/vtt .vtt
     </FilesMatch>
 </IfModule>
 
-#If your server don't support ETags deactivate with "None" (and remove header)
+#If your server don"t support ETags deactivate with "None" (and remove header)
 <IfModule mod_headers.c>
     Header unset ETag
     FileETag None

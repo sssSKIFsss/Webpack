@@ -1,11 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const FaviconWebpackPlugin = require('favicons-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PATHS = require('./paths');
+const fs = require("fs");
+const path = require("path");
+const FaviconWebpackPlugin = require("favicons-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const sets = require("../webpack.settings");
 
-const PAGES_DIR = path.resolve(PATHS.src, PATHS.srcPug);
-const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'));
+const PATHS = sets.paths;
+const PAGES_DIR = path.resolve(PATHS.srcPug);
+const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith(".pug"));
 
 module.exports = function () {
 	return {
@@ -13,18 +14,18 @@ module.exports = function () {
 			rules: [{
 				test: /\.pug$/,
 				include: [
-					path.resolve(PATHS.src, PATHS.srcPug),
-					path.resolve(PATHS.src, PATHS.srcComponents)
+					path.resolve(PATHS.srcPug),
+					path.resolve(PATHS.srcComponents)
 				],
 				use: [
 					{
-						loader: 'pug-loader',
+						loader: "pug-loader",
 						options: {
 							pretty: true
 						}
 					}, {
-						loader: 'pug-lint-loader',
-						options: require('../.pug-lintrc')
+						loader: "pug-lint-loader",
+						options: require("../.pug-lintrc")
 					}
 				]
 			}]
@@ -33,32 +34,33 @@ module.exports = function () {
 			...PAGES.map(page => new HtmlWebpackPlugin({
 				inject: true,
 				template: `${PAGES_DIR}/${page}`,
-				filename: `./${page.replace(/\.pug/, '.html')}`
+				filename: `./${page.replace(/\.pug/, ".html")}`
 			})),
 			/*
 				// ЛИБО ТАК
 				new htmlWebpackPlugin({
-					filename: 'index.html',
+					filename: "index.html",
 					title: "Main Page",
-					//favicon: 'favicon.ico',
+					//favicon: "favicon.ico",
 					template: `${PAGES_DIR}/index.pug`,
-					chunksSortMode: 'manual',
-					chunks: ['app', 'common', 'vendors'],
+					chunksSortMode: "manual",
+					chunks: ["app", "common", "vendors"],
 				}),
 				new htmlWebpackPlugin({
-					filename: 'adm.html',
+					filename: "adm.html",
 					title: "Adm Page",
-					//favicon: 'favicon.ico',
+					//favicon: "favicon.ico",
 					template: `${PAGES_DIR}/admin.pug`,
-					chunksSortMode: 'manual',
-					chunks: ['adm', 'common', 'vendors'],
+					chunksSortMode: "manual",
+					chunks: ["adm", "common", "vendors"],
 				}),
 			*/
 			new FaviconWebpackPlugin({
-				logo: path.resolve(PATHS.src, PATHS.srcImg, PATHS.srcFavicon),
-				outputPath: path.join(PATHS.distImg, PATHS.distFavicon),
-				prefix: path.join(PATHS.distImg, PATHS.distFavicon),
-				inject: 'force'
+				logo: path.resolve(PATHS.srcFavicon),
+				// outputPath: path.join(PATHS.distFavicon),
+				outputPath: path.join(PATHS.distFavicon),
+				prefix: path.join(PATHS.distFavicon),
+				inject: "force"
 			})
 		]
 	};

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 //
 module.exports = {
 	"disallowAttributeConcatenation": null,
@@ -42,7 +42,7 @@ module.exports = {
 		"input[type=submit]": "value"
 	}],
 	"requireStrictEqualityOperators": true,
-	"validateAttributeQuoteMarks": "'",
+	"validateAttributeQuoteMarks": "\"",
 	"validateAttributeSeparator": {
 		"separator": " ",
 		"multiLineSeparator": "\n  "

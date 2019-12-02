@@ -1,3 +1,3 @@
-'use strict';
+"use strict";
 
-import '~js/dynamic_import';
+import "~js/dynamic_import";

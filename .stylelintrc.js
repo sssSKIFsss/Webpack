@@ -1,11 +1,12 @@
-'use strict';
+"use strict";
 //
 module.exports = {
 	"plugins": [
-		'stylelint-order',
-		'stylelint-scss',
-    'stylelint-selector-bem-pattern'
+		"stylelint-order",
+		"stylelint-scss",
+    "stylelint-selector-bem-pattern"
 	],
+	"extends": "stylelint-config-standard",
 	"rules": {
 		"at-rule-empty-line-before": [ "always", {
 			except: [
@@ -253,12 +254,12 @@ module.exports = {
 		"value-list-comma-newline-before": ["never-multi-line", {
 				"message": "Значения свойств должны быть без переносов"}],
 		"value-list-max-empty-lines": 0,
-		'scss/at-else-closing-brace-newline-after': 'always-last-in-chain',
-		'scss/at-else-closing-brace-space-after': 'always-intermediate',
-		'scss/at-else-empty-line-before': 'never',
-		'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
-		'scss/at-if-closing-brace-space-after': 'always-intermediate',
-		'scss/at-rule-no-unknown': true,
-		'scss/selector-no-redundant-nesting-selector': true
+		"scss/at-else-closing-brace-newline-after": "always-last-in-chain",
+		"scss/at-else-closing-brace-space-after": "always-intermediate",
+		"scss/at-else-empty-line-before": "never",
+		"scss/at-if-closing-brace-newline-after": "always-last-in-chain",
+		"scss/at-if-closing-brace-space-after": "always-intermediate",
+		"scss/at-rule-no-unknown": true,
+		"scss/selector-no-redundant-nesting-selector": true
 	}
 };

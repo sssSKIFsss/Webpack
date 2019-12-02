@@ -5,25 +5,29 @@
 @import "utils/fonts";
 @import "modules/wrapper";
 
+//noinspection Stylelint
 html {
-  line-height: $mainLineHeight;
-  font-size: $mainFontSize;
   color: $mainFontColor;
+  font-size: $mainFontSize;
   height: 100%;
+  line-height: $mainLineHeight;
 
+  //noinspection Stylelint
   h2 {
-    font-family: $mainFont;
-    font-weight: 700;
-    font-size: 18px;
     color: $light-color;
+    font-family: $mainFont;
+    font-size: 18px;
+    font-weight: 700;
   }
 
   @media screen and (max-width: $desktopWidth) {
     font-size: 16px;
   }
+
   @media screen and (max-width: $tableWidth) {
     font-size: 15px;
   }
+
   @media screen and (max-width: $phoneWidth) {
     font-size: 14px;
   }

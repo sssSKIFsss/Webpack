@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const path = require('path');
-const PATHS = require('./paths');
-
+const path = require("path");
+const sets = require("../webpack.settings");
+const PATHS = sets.paths;
 // eslint-loader TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 module.exports = function () {
@@ -11,10 +11,10 @@ module.exports = function () {
 			rules: [{
 				test: /\.js$/,
 				include: [
-					path.resolve(PATHS.src, PATHS.srcJS),
-					path.resolve(PATHS.src, PATHS.srcComponents)
+					path.resolve(PATHS.srcJS),
+					path.resolve(PATHS.srcComponents)
 				],
-				use: ['babel-loader', 'eslint-loader']
+				use: ["babel-loader", "eslint-loader"]
 			}]
 		}
 	};
