@@ -1,18 +1,18 @@
-@import "utils/reset";
-@import "utils/libs";
-@import "utils/vars";
-@import "utils/mixins";
-@import "utils/fonts";
-@import "modules/wrapper";
+@import "./utils/reset";
+@import "./utils/libs";
+@import "./utils/vars";
+@import "./utils/mixins";
+@import "./utils/fonts";
+@import "./modules/wrapper";
 
-//noinspection Stylelint
+// noinspection Stylelint
 html {
   color: $mainFontColor;
   font-size: $mainFontSize;
   height: 100%;
   line-height: $mainLineHeight;
 
-  //noinspection Stylelint
+  // noinspection Stylelint
   h2 {
     color: $light-color;
     font-family: $mainFont;

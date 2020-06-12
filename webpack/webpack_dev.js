@@ -8,15 +8,18 @@ const devServer = require("./server");
 
 
 module.exports = merge(
-	{
-		devtool: "cheap-module-eval-source-map",
-		mode: "development",
+  {
+    devtool: "cheap-module-eval-source-map",
+    mode: "development",
 
-		plugins: [
-			new webpack.HotModuleReplacementPlugin(),
-			new DashboardPlugin()
-		]
-	},
-	devServer
+    plugins: [
+      // для использования HotReload подключаем плагин здесь,
+      // опцию hot = true в настройках сервера и соответсвующий
+      // код в исходниках
+      new webpack.HotModuleReplacementPlugin(),
+      new DashboardPlugin()
+    ]
+  },
+  devServer
 );
 

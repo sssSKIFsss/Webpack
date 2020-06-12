@@ -11,7 +11,7 @@ module.exports = function () {
 				use: [{
 					loader: "file-loader",
 					options: {
-						name: "[name].[ext]",
+						name: "[name].[ext]?[hash]",
 						outputPath: PATHS.distFonts,
 						useRelativePath: true
 					}

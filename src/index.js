@@ -13,9 +13,10 @@
 //import Bootstrap from "bootstrap/dist/js/bootstrap.min/js"
 //import "bootstrap/dist/js/bootstrap.min/js"
 
-import "~styles/css/index.css";
-import "~styles/scss/index.scss";
+import "@styles/css/index.css";
+import "@styles/scss/index.scss";
+import "@pug/index.pug";
 
-import "~js/dynamic_require";
-import "~js/dynamic_import";
-import "~js/menu";
+import "@js/dynamic_require";
+import "@js/dynamic_import";
+import "@js/menu";

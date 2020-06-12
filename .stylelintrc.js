@@ -1,5 +1,5 @@
 "use strict";
-//
+
 module.exports = {
 	"plugins": [
 		"stylelint-order",
@@ -208,7 +208,7 @@ module.exports = {
 		"selector-combinator-space-before": "always",
 		"selector-descendant-combinator-no-non-space": [true, {
 			"message": "Комбинированные селекторы нужно отделять одним пробелом"}],
-		"selector-list-comma-newline-after": ["never-multi-line", {
+		"selector-list-comma-newline-after": ["always-multi-line", {
 			"message": "После запятой необходим перенос строки"}],
 		"selector-list-comma-newline-before": ["never-multi-line", {
 			"message": "Перед запятой не должно быть переноса строки"}],

@@ -4,11 +4,11 @@ const path = require("path");
 const sets = require("../webpack.settings");
 const PATHS = sets.paths;
 
-module.exports = (mode) => {
+module.exports = (devMode) => {
 	return {
 		module: {
 			rules: [{
-				test: /\.(png|jpe?g|gif|svg)$/,
+				test: /\.(png|jpe?g|gif|svg|webp)$/,
 				include: [
 					path.resolve(PATHS.srcImg),
 					path.resolve(PATHS.srcComponents)
@@ -19,13 +19,13 @@ module.exports = (mode) => {
 				use: [{
 					loader: "url-loader",
 					options: {
-						name: "[name].[ext]",
+						name: "[name].[ext]?[hash]",
 						// outputPath: PATHS.dist_img,
 						outputPath: path.join(PATHS.distImg),
 						useRelativePath: true,
 						limit: 1024
 					}
-				}].concat(mode === "development" ? [] : [{
+				}].concat(devMode ? [] : [{
 					loader: "image-webpack-loader",
 					options: {
 						mozjpeg: {
