@@ -18,7 +18,7 @@ module.exports = (ctx) => ({
 		// 	ignore: "rem",
 		// 	ignoreFiles: ctx.options.ignoreCssFiles
 		// }
-		// ...ctx.options.devMode === false ? {
+		// ...ctx.options.isDev === false ? {
 		// 	autoprefixer: { grid: true },
 		// 	"css-mqpacker": {},
 		// 	cssnano: {
@@ -42,7 +42,7 @@ module.exports = (ctx) => ({
 // 		require("postcss-import")(),
 // 		require("postcss-url")(),
 // 		require("autoprefixer")(),
-// 		...ctx.options.devMode !== true ?
+// 		...ctx.options.isDev !== true ?
 // 			require("cssnano")({ preset: "default"})() : false
 //
 // 	]
@@ -52,7 +52,7 @@ module.exports = (ctx) => ({
 // 		stylelint: {}
 // 	}
 // },
-// 		...ctx.options.devMode !== true ? {
+// 		...ctx.options.isDev !== true ? {
 // 			autoprefixer: { grid: true },
 // 			"css-mqpacker": {},
 // 			cssnano: {
@@ -75,7 +75,7 @@ module.exports = (ctx) => ({
 // 		stylelint: {}
 // 	}
 // },
-// 		...ctx.options.devMode !== true ? {
+// 		...ctx.options.isDev !== true ? {
 // 			autoprefixer: { grid: true },
 // 			"css-mqpacker": {},
 // 			cssnano: {
@@ -97,7 +97,7 @@ module.exports = (ctx) => ({
 // 		ident: "postcss",
 // 		plugins: {
 // 			"postcss-import": {},
-// 			...ctx.options.devMode === false ? {
+// 			...ctx.options.isDev === false ? {
 // 				autoprefixer: { grid: true },
 // 				"css-mqpacker": {},
 // 				cssnano: {

@@ -1,14 +1,14 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const sets = require("../webpack.settings");
-const PATHS = sets.paths;
+const P = sets.paths;
 module.exports = function () {
-	return {
-		plugins: [
-			new CopyPlugin([{
-				from: path.resolve(PATHS.srcHtaccess),
-				to: ""
-			}])
-		]
-	};
+  return {
+    plugins: [
+      new CopyPlugin([{
+        from: path.resolve(P.dir, P.src, P.srcHtaccess),
+        to: ""
+      }])
+    ]
+  };
 };

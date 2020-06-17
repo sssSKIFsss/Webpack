@@ -1,17 +1,21 @@
 const path = require("path");
-const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const sets = require("../webpack.settings");
-const PATHS = sets.paths;
+const P = sets.paths;
 
-module.exports = function (devMode) {
+// ВАЖНО!!!!!!
+// const ENV = require('yargs').argv.env;
+
+module.exports = function (isDev) {
   return {
     module: {
       rules: [{
         test: /\.(sa|sc|c)ss$/,
-        // include: sets.styleLoaderConfig,
+        include: sets.styleLoaderConfig,
         use: [
-          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          isDev ?
+            "style-loader" :
+            MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
@@ -24,8 +28,7 @@ module.exports = function (devMode) {
           {
             loader: "sass-loader",
             options: {sourceMap: true}
-          },
-          {
+          }, {
             loader: "postcss-loader",
             options: {
               sourceMap: true,
@@ -34,7 +37,7 @@ module.exports = function (devMode) {
                 //path: path.resolve(PATHS.config),
                 // path: path.resolve(PATHS.dir),
                 ctx: {
-                  devMode: devMode,
+                  isDev: isDev,
                   browsers: sets.browsers,
                   ignoreCssFiles: sets.ignoreCssFiles
                 }
@@ -45,17 +48,23 @@ module.exports = function (devMode) {
       }]
     },
     plugins: [
-      new webpack.SourceMapDevToolPlugin({
-        filename: "[file].map"
-      }),
       // mini-css-extract-plugin ценен ещё и тем,что умеет делить(сплитить) основной код
       new MiniCssExtractPlugin({
-        filename: path.join(
-          PATHS.distCSS, devMode ? PATHS.distCssDevFile : PATHS.distCssProdFile
-        ),
-        chunkFilename: path.join(
-          PATHS.distCSS, devMode ? PATHS.distCssDevChunk : PATHS.distCssProdChunk
-        )
+
+        // Experimental version !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        path: path.resolve(P.dir, P.dist),
+        filename: P.distStyle + "/[name].[hash].css",
+        chunkFilename: P.distStyle + "/[id].[hash].css"
+
+        // Old versionm !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // filename: path.join(
+        //   P.distStyle,
+        //   isDev ? P.distCssDevFile : P.distCssProdFile
+        // ),
+        // chunkFilename: path.join(
+        //   P.distStyle,
+        //   isDev ? P.distCssDevChunk : P.distCssProdChunk
+        // )
       })
     ]
   };

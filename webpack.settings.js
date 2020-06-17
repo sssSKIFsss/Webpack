@@ -5,23 +5,17 @@ const path = require("path");
 const projectPaths = {
   dir: __dirname,
   src: "src",
-  srcPug: "src/pug/pages",
-  srcJS: "src/js",
-  srcStyles: "src/styles",
-  srcImg: "src/images",
-  srcFavicon: "src/images/favicon/favicon.png",
-  srcFonts: "src/fonts",
-  srcComponents: "src/components",
-  srcHtaccess: "src/.htaccess",
+  srcPug: "pug",
+  srcJS: "js",
+  srcStyles: "styles",
+  srcImg: "images",
+  srcFavicon: "images/favicon/favicon.png",
+  srcFonts: "fonts",
+  srcComponents: "components",
+  srcHtaccess: ".htaccess",
   dist: "dist",
   distJS: "js",
-  distJsFile: "[name].[hash].js",
-  distJsChunk: "[name].[chunkhash].js",
-  distCSS: "css",
-  distCssDevFile: "[name].css",
-  distCssProdFile: "[name].[hash].css",
-  distCssDevChunk: "[id].css",
-  distCssProdChunk: "[id].[hash].css",
+  distStyle: "css",
   distImg: "img",
   // неполный путь для favicon
   distFavicon: "img/favicon",
@@ -36,9 +30,10 @@ module.exports = {
   // "name" исправить в  "package.json"
   copyright: "Example Company, Inc.",
   entries: {
-    app: "./index.js",
-    adm: "./adminka.js",
-    vndrs: "jquery"
+    app: "./js/main.js"
+    // ,
+    // adm: "./js/adminka.js",
+    // jquery: "jquery"
     //
     // общий для входных файлов код "dynamic_import" можно
     // выделить в отдельный бандл вручную, не используя
@@ -49,10 +44,10 @@ module.exports = {
     // shared: "./js/dynamic_import.js"
   },
   devServerConfig: {
-    public: () => "http://localhost:8081",
+    public: () => "http://localhost:8082",
     host: () => "localhost",
     poll: () => false,
-    port: () => 8081,
+    port: () => 8082,
     https: () => false
   },
   browsers: [
@@ -71,8 +66,8 @@ module.exports = {
   ignoreCssFiles: ["**/font/**/*.css", "**/tmp/**/*.css", "**/temp/**/*.css"],
 
   styleLoaderConfig: [
-    path.resolve(projectPaths.srcStyles),
-    path.resolve(projectPaths.srcComponents)
+    path.resolve(projectPaths.dir, projectPaths.src, projectPaths.srcStyles),
+    path.resolve(projectPaths.dir, projectPaths.src, projectPaths.srcComponents)
   ],
 
   // urls: {

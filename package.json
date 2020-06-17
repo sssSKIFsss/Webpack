@@ -6,11 +6,8 @@
   "author": "skif",
   "license": "ISC",
   "scripts": {
-    "dev": "cls && webpack-dashboard -- webpack-dev-server --env development",
-    "devv": "cls && webpack-dev-server --progress --color --watch --content-base dist --env development",
-    "debug": "cls && webpack --env development --open --color",
-    "prod": "webpack --env production --color",
-    "display": "cls && webpack --env production --profile --display-modules --display-reasons --color",
+    "dev": "cls && webpack-dev-server --color --env development",
+    "prod": "webpack --color --env production",
     "serv": "cls && static dist"
   },
   "dependencies": {

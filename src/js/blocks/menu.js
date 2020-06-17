@@ -3,7 +3,7 @@
 async function showMenu() {
   try {
     // eslint-disable-next-line
-    let menuID = await import(/* webpackChunkName: "menuButton" */ "@components/menu");
+    let menuID = await import(/* webpackChunkName: "menuButton" */ "~components/menu");
     let Menu = menuID.default;
     let homeMenu = new Menu({
       title: "Комнаты дома",
@@ -34,7 +34,7 @@ document.getElementById("menuButton").onclick = function () {
 // для реализации Hot Reload
 // noinspection JSUnresolvedVariable
 if(module.hot) {
-  module.hot.accept("@components/menu", function() {
+  module.hot.accept("~components/menu", function() {
     document.getElementById("menuButton").onclick = function () {
       // noinspection JSIgnoredPromiseFromCall
       showMenu();
