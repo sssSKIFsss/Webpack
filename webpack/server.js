@@ -1,6 +1,5 @@
 const path = require("path");
-const sets = require("../webpack.settings");
-const P = sets.paths;
+const s = require("../webpack.settings");
 const SERV = {
   poll: () => false,
   https: () => false
@@ -9,7 +8,7 @@ const SERV = {
 module.exports = () => {
   return {
     devServer: {
-      contentBase: path.resolve(P.dir, P.dist),
+      contentBase: path.resolve(s.dir, s.dist),
       public: "http://localhost:8081",
       host: "localhost",
       port: 8081,

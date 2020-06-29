@@ -1,5 +1,3 @@
-"use strict";
-
 // import AppService from "./modules/app.service";
 // const service = new AppService("Hello AppService");
 // service.log();
@@ -17,9 +15,10 @@
 //import Bootstrap from "bootstrap/dist/js/bootstrap.min/js"
 //import "bootstrap/dist/js/bootstrap.min/js"
 
-import "~styles/css/index.css";
-import "~styles/scss/index.scss";
-import "~pug/index.pug";
+
+import "@styles/css/index.css";
+import "@styles/scss/index.scss";
+import "@pug/index.pug";
 
 import "./blocks/dynamic_require";
 import "./blocks/dynamic_import";

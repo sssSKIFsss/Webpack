@@ -2,35 +2,33 @@
 
 const merge = require("webpack-merge");
 const path = require("path");
-const webpack = require("webpack");
-const DashboardPlugin = require("webpack-dashboard/plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 
+const webpack = require("webpack");
 const configureCopy = require("./webpack/copy");
 const configureFont = require("./webpack/font");
-const configurePug = require("./webpack/pug");
 const configureImg = require("./webpack/img");
+const configurePug = require("./webpack/pug");
 const configureJS = require("./webpack/js");
 const configureStyle = require("./webpack/style");
 const configureClear = require("./webpack/clear");
 const devServer = require("./webpack/server");
-const sets = require("./webpack.settings");
-const P = sets.paths;
+const s = require("./webpack.settings");
 
-module.exports = env => {
+module.exports = (env) => {
   const isDev = env === "development";
-
   return merge(
     {
       // The base directory, an absolute path, for resolving
       // ENTRY POINTS and LOADERS from configuration.
-      context: path.resolve(__dirname, P.src),
+      context: path.resolve(__dirname, s.src),
 
-      entry: sets.entries,
+      entry: s.entries,
 
       output: {
-        path: path.resolve(__dirname, P.dist),
-        filename: P.distJS + "/[name].[hash].js",
-        chunkFilename: P.distJS + "/[name].[chunkhash].js"
+        path: path.resolve(__dirname, s.dist),
+        filename: s.distJS + "/" + s.fileName(isDev) + "js",
+        publicPath: "/"
       }
     },
 
@@ -40,17 +38,18 @@ module.exports = env => {
     } : {
       devtool: "source-map",
       mode: "production"
-    }, {
+    },
 
+    {
       resolve: {
         alias: {
-          "~": path.resolve(__dirname, "src/node_modules/"),
-          "~pug": path.resolve(__dirname, "src/pug/"),
-          "~js": path.resolve(__dirname, "src/js/"),
-          "~styles": path.resolve(__dirname, "src/styles/"),
-          "~images": path.resolve(__dirname, "src/images/"),
-          "~components": path.resolve(__dirname,
-            "src/components/")
+          "@node": path.resolve(__dirname, "node_modules"),
+          "@pug": path.resolve(__dirname, "src/pug"),
+          "@js": path.resolve(__dirname, "src/js"),
+          "@styles": path.resolve(__dirname, "src/styles"),
+          "@images": path.resolve(__dirname, "src/images"),
+          "@components": path.resolve(__dirname,
+            "src/components")
         }
       },
 
@@ -97,9 +96,9 @@ module.exports = env => {
         noEmitOnErrors: true
       },
 
-      // ускорение сборки отменой парсинга файлов больших библиотек,
-      // которые в этом случае не должны содержать require, import, define
-      // и др. механизмы импорта
+      // ускорение сборки отменой парсинга файлов больших
+      // библиотек,которые в этом случае не должны содержать
+      // require, import, define и др. механизмы импорта
       module: {
         noParse: /jquery|bootstrap|popper.js/
       },
@@ -110,32 +109,25 @@ module.exports = env => {
         new webpack.DefinePlugin({
           ENV: JSON.stringify(isDev ?
             "development" : "production")
+        }),
+
+        new StylelintPlugin({
+          configFile: "./.stylelintrc.js",
+          context: "./"
         })
+
+
       ].concat(isDev ? [
         // для использования HotReload подключаем плагин здесь,
         // опцию hot = true в настройках сервера и соответсвующий
         // код в исходниках
-        new webpack.HotModuleReplacementPlugin(),
-        new DashboardPlugin()
-      ] : [
-
-
-
-        // new webpack.SourceMapDevToolPlugin({
-        //   filename: "[file].map",
-        //   append: "\n//# sourceMappingURL = " +
-        //     path.resolve(P.dir, P.dist, P.distJS, "[url]")
-        // })
-
-
-
-
-      ])
+        new webpack.HotModuleReplacementPlugin()
+      ] : [])
     },
     configureCopy(),
     configureFont(),
-    configurePug(),
     configureImg(isDev),
+    configurePug(),
     configureJS(),
     configureStyle(isDev),
     isDev ? devServer() : configureClear()

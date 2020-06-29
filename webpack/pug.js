@@ -2,10 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const FaviconWebpackPlugin = require("favicons-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const sets = require("../webpack.settings");
+const s = require("../webpack.settings");
 
-const P = sets.paths;
-const PAGES_DIR = path.resolve(P.src, P.srcPug);
+const PAGES_DIR = path.resolve(s.src, s.srcPug);
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith(".pug"));
 
 module.exports = function () {
@@ -14,8 +13,8 @@ module.exports = function () {
       rules: [{
         test: /\.pug$/,
         include: [
-          path.resolve(P.dir, P.src, P.srcPug),
-          path.resolve(P.dir, P.src, P.srcComponents)
+          path.resolve(s.dir, s.src, s.srcPug),
+          path.resolve(s.dir, s.src, s.srcComponents)
         ],
         use: [
           {
@@ -56,9 +55,12 @@ module.exports = function () {
         }),
         */
       new FaviconWebpackPlugin({
-        logo: path.resolve(P.dir, P.src, P.srcFavicon),
-        outputPath: path.join(P.distFavicon),
-        prefix: path.join(P.distFavicon),
+        logo: path.resolve(s.src, s.srcImg, s.srcFavicon, "favicon.png"),
+        outputPath: path.join(s.distImg, s.distFavicon),
+        prefix: path.join(s.distImg, s.distFavicon),
+        // logo: path.resolve(P.dir, P.src, P.srcImg, P.srcFavicon, "favion.png"),
+        // outputPath: path.join(P.distImg, P.distFavicon),
+        // prefix: path.join(P.distImg, P.distFavicon),
         inject: "force"
       })
     ]

@@ -4,33 +4,33 @@ const postcssScss = require("postcss-scss");
 
 module.exports = (ctx) => ({
 	ident: "postcss",
-	parser: "postcss-scss",
-	syntax: "postcss-scss",
+	// parser: "postcss-scss",
+	// syntax: "postcss-scss",
 	plugins: {
 		// если postcss-loader стоит раньше, чем scss-loader, то не включаем
 		// "postcss-import": {},
-
 		// "postcss-nested": {},
-	 	stylelint: {},
-
+	 	// stylelint: {} ,
+    //
 		// doiuse: {
 		// 	browsers: ctx.options.browsers,
-		// 	ignore: "rem",
-		// 	ignoreFiles: ctx.options.ignoreCssFiles
-		// }
+		// 	ignore: "rem"
+      // ,
+			// ignoreFiles: ctx.options.ignoreCssFiles
+		// },
+    // ,
 		// ...ctx.options.isDev === false ? {
 		// 	autoprefixer: { grid: true },
 		// 	"css-mqpacker": {},
-		// 	cssnano: {
-		// 		preset: [
-		// 			"default",
-		// 			{
-		// 				discardComments: {
-		// 					removeAll: true
-		// 				}
-		// 			}
-		// 		]
-		// 	}
+			// cssnano: {
+      //   sourceMap: true,
+			// 	preset: [
+			// 		"default",
+			// 		{
+			// 			discardComments: { removeAll: true }
+			// 		}
+			// 	]
+			// }
 		// } : {}
 	}
 });

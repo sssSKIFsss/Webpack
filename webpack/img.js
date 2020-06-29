@@ -1,8 +1,7 @@
 "use strict";
 //
 const path = require("path");
-const sets = require("../webpack.settings");
-const P = sets.paths;
+const s = require("../webpack.settings");
 
 module.exports = (devMode) => {
   return {
@@ -10,18 +9,18 @@ module.exports = (devMode) => {
       rules: [{
         test: /\.(png|jpe?g|gif|svg|webp)$/,
         include: [
-          path.resolve(P.dir, P.src, P.srcImg),
-          path.resolve(P.dir, P.src, P.srcComponents)
+          path.resolve(s.dir, s.src, s.srcImg),
+          path.resolve(s.dir, s.src, s.srcComponents)
         ],
         exclude: [
-          path.resolve(P.dir, P.src, P.srcFavicon)
+          path.resolve(s.dir, s.src, s.srcImg, s.srcFavicon)
         ],
         use: [{
           loader: "url-loader",
           options: {
             name: "[name].[ext]?[hash]",
             // outputPath: PATHS.dist_img,
-            outputPath: path.join(P.distImg),
+            outputPath: path.join(s.distImg),
             useRelativePath: true,
             limit: 1024
           }

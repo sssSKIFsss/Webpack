@@ -1,82 +1,106 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const sets = require("../webpack.settings");
-const P = sets.paths;
+const StylelintPlugin = require("stylelint-webpack-plugin");
+//const CssNanoPlugin = require("cssnano-webpack-plugin");
+const s = require("../webpack.settings");
 
-// ВАЖНО!!!!!!
-// const ENV = require('yargs').argv.env;
+const cssLoaders = (isDev, isSCSS = false) => {
+  console.log("isSCSS = ", isSCSS);
+  return [
+    {
+      // isDev ?
+      //   "style-loader" :
+      //   MiniCssExtractPlugin.loader,
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        hmr: isDev,
+        reloadAll: true,
+        sourceMap: true
+      }
+    }, {
+      loader: "css-loader",
+      options: {
+        // требуется для правильной обработки импорта из postcss
+        // 3 = postcss & resolve-url & sass loaders
+        modules: true,
+        importLoaders: isSCSS ? 3 : 2,
 
-module.exports = function (isDev) {
+        sourceMap: true
+      }
+    }, {
+      loader: "resolve-url-loader",
+      options: {
+        sourceMap: true
+      }
+    }, {
+      loader: "postcss-loader",
+      options: {
+        sourceMap: true,
+        config: {
+          //path: __dirname,
+          //path: path.resolve(PATHS.config),
+          // path: path.resolve(PATHS.dir),
+          ctx: {
+            isDev: isDev,
+            browsers: s.browsers
+            // ignoreCssFiles: s.ignoreCssFiles
+          }
+        }
+      }
+    }
+  ];
+};
+
+module.exports = isDev => {
   return {
     module: {
-      rules: [{
-        test: /\.(sa|sc|c)ss$/,
-        include: sets.styleLoaderConfig,
-        use: [
-          isDev ?
-            "style-loader" :
-            MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              // postcss & resolve-url & sass loaders used
-              importLoaders: 3,
-              sourceMap: true
-            }
-          },
-          "resolve-url-loader",
-          {
-            loader: "sass-loader",
-            options: {sourceMap: true}
-          }, {
-            loader: "postcss-loader",
-            options: {
-              sourceMap: true,
-              config: {
-                //path: __dirname,
-                //path: path.resolve(PATHS.config),
-                // path: path.resolve(PATHS.dir),
-                ctx: {
-                  isDev: isDev,
-                  browsers: sets.browsers,
-                  ignoreCssFiles: sets.ignoreCssFiles
-                }
-              }
-            }
-          }
-        ]
-      }]
+      rules: [
+        {
+          test: /\.css$/,
+          include: [
+            path.resolve(s.dir, s.src, s.srcStyles),
+            path.resolve(s.dir, s.src, s.srcComponents)
+          ],
+          use: cssLoaders(isDev)
+        }, {
+          test: /\.s[ac]ss$/,
+          include: [
+            path.resolve(s.dir, s.src, s.srcStyles),
+            path.resolve(s.dir, s.src, s.srcComponents)
+          ],
+          use:
+            cssLoaders(isDev, true).concat([{
+              loader: "sass-loader",
+              options: {sourceMap: true}
+            }])
+        }
+      ]
     },
+
+    // optimization: {
+    //   minimizer: [
+    //     new CssNanoPlugin({
+    //       sourceMap: true,
+    //       cssnanoOptions: {
+    //         preset: ["default", {
+    //           discardComments: { removeAll: true }
+    //         }]
+    //       }
+    //     })
+    //   ]
+    // },
+
     plugins: [
-      // mini-css-extract-plugin ценен ещё и тем,что умеет делить(сплитить) основной код
-      new MiniCssExtractPlugin({
-
-        // Experimental version !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        path: path.resolve(P.dir, P.dist),
-        filename: P.distStyle + "/[name].[hash].css",
-        chunkFilename: P.distStyle + "/[id].[hash].css"
-
-        // Old versionm !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // filename: path.join(
-        //   P.distStyle,
-        //   isDev ? P.distCssDevFile : P.distCssProdFile
-        // ),
-        // chunkFilename: path.join(
-        //   P.distStyle,
-        //   isDev ? P.distCssDevChunk : P.distCssProdChunk
-        // )
+      new MiniCssExtractPlugin(
+        {
+          path: path.resolve(s.dir, s.dist),
+          filename: s.distStyle + "/" + s.fileName(isDev) + "css"
+        }
+      ),
+      new StylelintPlugin({
+        configFile: "../.stylelintrc.js",
+        context: "../"
       })
     ]
   };
 };
-
-
-// const TerserJSPlugin = require('terser-webpack-plugin');
-// const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-// optimization: {
-// 	minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-// },
-// вариант:
-// new OptimizeCssAssetsPlugin({
-// 	cssProcessor: postcss([CSSMQPlacker])
-// })

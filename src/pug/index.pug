@@ -8,15 +8,15 @@ block content
   section
     .container
       +item("Hello Itemx", "This is first view on Items")
-      img(src=require("~images/img2.jpg").default width="100" alt="men")
+      img(src=require("@images/img2.jpg").default width="100" alt="men")
   section
     .container
       +item("Hello pug!", "Jade - node template engine")
-      img(src=require("~images/img3.jpg").default width="100" alt="women")
+      img(src=require("@images/img3.jpg").default width="100" alt="women")
   section
     .container
       +item("Hello Webpack!", "Webpack - engine for collecting files")
-      img(src=require("~images/img2.jpg").default width="100" alt="men")
+      img(src=require("@images/img2.jpg").default width="100" alt="men")
   button(id="requireButton") dynamic-require test!
   button(id="importButton") dynamic-import test!
   //script

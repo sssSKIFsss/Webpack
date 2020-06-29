@@ -1,18 +1,17 @@
 const path = require("path");
-const sets = require("../webpack.settings");
-const P = sets.paths;
+const s = require("../webpack.settings");
 
 module.exports = function () {
   return {
     module: {
       rules: [{
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        include: path.resolve(P.dir, P.src, P.srcFonts),
+        include: path.resolve(s.dir, s.src, s.srcFonts),
         use: [{
           loader: "file-loader",
           options: {
             name: "[name].[ext]?[hash]",
-            outputPath: P.distFonts,
+            outputPath: s.distFonts,
             useRelativePath: true
           }
         }]
