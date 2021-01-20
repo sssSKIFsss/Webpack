@@ -1,3 +1,5 @@
+"use strict";
+
 // import AppService from "./modules/app.service";
 // const service = new AppService("Hello AppService");
 // service.log();
@@ -14,7 +16,6 @@
 // Подключение библиотеки из конкретного файла
 //import Bootstrap from "bootstrap/dist/js/bootstrap.min/js"
 //import "bootstrap/dist/js/bootstrap.min/js"
-
 
 import "@styles/css/index.css";
 import "@styles/scss/index.scss";

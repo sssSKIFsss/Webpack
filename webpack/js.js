@@ -28,7 +28,6 @@ module.exports = function () {
           }, {
             loader: "eslint-loader",
             options: {
-              eslintPath: path.resolve(s.dir),
               sourceMap: true
             }
           }
@@ -66,7 +65,9 @@ module.exports = function () {
             output: {
               ecma: 5,
               comments: false,
+              /* eslint-disable */
               ascii_only: true
+              /* eslint-enable */
             }
           }
         })

@@ -55,12 +55,10 @@ module.exports = function () {
         }),
         */
       new FaviconWebpackPlugin({
-        logo: path.resolve(s.src, s.srcImg, s.srcFavicon, "favicon.png"),
+        logo: path.resolve(s.dir, s.src, s.srcImg,
+          s.srcFavicon, "favicon.png"),
         outputPath: path.join(s.distImg, s.distFavicon),
         prefix: path.join(s.distImg, s.distFavicon),
-        // logo: path.resolve(P.dir, P.src, P.srcImg, P.srcFavicon, "favion.png"),
-        // outputPath: path.join(P.distImg, P.distFavicon),
-        // prefix: path.join(P.distImg, P.distFavicon),
         inject: "force"
       })
     ]

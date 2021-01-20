@@ -1,16 +1,11 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
-//const CssNanoPlugin = require("cssnano-webpack-plugin");
 const s = require("../webpack.settings");
 
 const cssLoaders = (isDev, isSCSS = false) => {
-  console.log("isSCSS = ", isSCSS);
   return [
     {
-      // isDev ?
-      //   "style-loader" :
-      //   MiniCssExtractPlugin.loader,
       loader: MiniCssExtractPlugin.loader,
       options: {
         hmr: isDev,
@@ -20,11 +15,8 @@ const cssLoaders = (isDev, isSCSS = false) => {
     }, {
       loader: "css-loader",
       options: {
-        // требуется для правильной обработки импорта из postcss
-        // 3 = postcss & resolve-url & sass loaders
         modules: true,
         importLoaders: isSCSS ? 3 : 2,
-
         sourceMap: true
       }
     }, {
@@ -32,23 +24,55 @@ const cssLoaders = (isDev, isSCSS = false) => {
       options: {
         sourceMap: true
       }
-    }, {
-      loader: "postcss-loader",
-      options: {
-        sourceMap: true,
-        config: {
-          //path: __dirname,
-          //path: path.resolve(PATHS.config),
-          // path: path.resolve(PATHS.dir),
-          ctx: {
-            isDev: isDev,
-            browsers: s.browsers
-            // ignoreCssFiles: s.ignoreCssFiles
-          }
-        }
-      }
     }
   ];
+};
+
+const scssLoader = () => {
+  return [{
+    loader: "sass-loader",
+    options: { sourceMap: true }
+  }];
+};
+
+const postcssLoader = (isDev) => {
+  return [{
+    loader: "postcss-loader",
+    options: {
+      ident: "postcss",
+      sourceMap: true,
+      plugins: () => [
+        // require("postcss-import")(),
+        // require("postcss-nested")(),
+        // require("stylelint")(),
+        require("doiuse")({
+          sourceMap: true,
+          // browsers: "../.browserslistrc" по-умолчанию,
+          ignore: "rem",
+          ignoreFiles: ["**/font/**/*.css", "**/tmp/**/*.css", "**/temp/**/*.css"]
+        }),
+        require("autoprefixer")({
+          sourceMap: true,
+          grid: true
+        })
+      ].concat(
+        isDev ? [] : [
+          require("css-mqpacker")({
+            sourceMap: true
+          }),
+          require("cssnano")({
+            preset: [
+              "default",
+              {
+                sourceMap: true,
+                discardComments: {removeAll: true}
+              }
+            ]
+          })
+        ]
+      )
+    }
+  }];
 };
 
 module.exports = isDev => {
@@ -61,7 +85,9 @@ module.exports = isDev => {
             path.resolve(s.dir, s.src, s.srcStyles),
             path.resolve(s.dir, s.src, s.srcComponents)
           ],
-          use: cssLoaders(isDev)
+          use:
+            cssLoaders(isDev, false).concat(
+              postcssLoader(isDev))
         }, {
           test: /\.s[ac]ss$/,
           include: [
@@ -69,37 +95,26 @@ module.exports = isDev => {
             path.resolve(s.dir, s.src, s.srcComponents)
           ],
           use:
-            cssLoaders(isDev, true).concat([{
-              loader: "sass-loader",
-              options: {sourceMap: true}
-            }])
+            cssLoaders(isDev, true).concat(
+              postcssLoader(isDev)).concat(
+              scssLoader())
         }
       ]
     },
-
-    // optimization: {
-    //   minimizer: [
-    //     new CssNanoPlugin({
-    //       sourceMap: true,
-    //       cssnanoOptions: {
-    //         preset: ["default", {
-    //           discardComments: { removeAll: true }
-    //         }]
-    //       }
-    //     })
-    //   ]
-    // },
 
     plugins: [
       new MiniCssExtractPlugin(
         {
           path: path.resolve(s.dir, s.dist),
-          filename: s.distStyle + "/" + s.fileName(isDev) + "css"
+          filename: s.distStyle + "/" + s.fileName(isDev) +
+            "css",
+          chunkFilename: s.distStyle + "/" +
+            s.chunkFileName(isDev) + "css"
         }
       ),
       new StylelintPlugin({
-        configFile: "../.stylelintrc.js",
-        context: "../"
+        context: "../",
+        configFile: ".stylelintrc.js"
       })
     ]
   };

@@ -21,7 +21,10 @@ module.exports = {
   config: "webpack",
   templates: "templates",
 
-  fileName: (isDev) => isDev ? "[name]." : "[name].[hash].",
+  fileName:
+    (isDev) => isDev ? "[name]." : "[name].[hash].",
+  chunkFileName:
+    (isDev) => isDev ? "[id]." : "[id].[hash].",
 
   entries: {
     app: "./js/main.js",
@@ -34,19 +37,5 @@ module.exports = {
     // adm: { import: "./adminka.js", dependOn: "shared" },
     // vendors: "jquery",
     // shared: "./js/dynamic_import.js"
-  },
-
-  browsers: [
-    "> 1%",
-    "last 1 major version",
-    "not dead",
-    "Chrome >= 45",
-    "Firefox >= 38",
-    "Edge >= 12",
-    "Explorer >= 10",
-    "iOS >= 9",
-    "Safari >= 9",
-    "Android >= 4.4",
-    "Opera >= 30"
-  ]
+  }
 };

@@ -1,5 +1,5 @@
 "use strict";
-//
+
 const path = require("path");
 const s = require("../webpack.settings");
 

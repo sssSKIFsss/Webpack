@@ -5,19 +5,29 @@
 @import "./utils/fonts";
 @import "./modules/wrapper";
 
-// noinspection Stylelint
 html {
   color: $mainFontColor;
   font-size: $mainFontSize;
   height: 100%;
   line-height: $mainLineHeight;
 
-  // noinspection Stylelint
   h2 {
     color: $light-color;
     font-family: $mainFont;
     font-size: 18px;
     font-weight: 700;
+    margin-top: 10px;
+  }
+
+  .container {
+    display: non;
+    margin: 100px;
+    padding: 100px;
+  }
+
+  .content-wrapper {
+    margin: 100px;
+    padding: 100px;
   }
 
   @media screen and (max-width: $desktopWidth) {
